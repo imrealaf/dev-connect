@@ -6,6 +6,8 @@ import * as validator from "../validators/profile.validator";
 
 const router: Router = Router();
 
+/* ------------------ PROFILES ----------------- */
+
 // @route   GET api/profiles/me
 // @desc    get current users profile
 // @access  private
@@ -35,5 +37,39 @@ router.post(
 // @desc    delete profile, user & posts
 // @access  private
 router.delete("/", authMiddleware, controller.deleteProfile);
+
+/* ------------------ EXPERIENCE ----------------- */
+
+// @route   PUT api/profiles/experience
+// @desc    add profile experience
+// @access  private
+router.put(
+  "/experience",
+  authMiddleware,
+  validator.validateAddExperience,
+  controller.addExperience
+);
+
+// @route   DELETE api/profiles/experience
+// @desc    delete experience from profile
+// @access  private
+router.delete("/experience/:id", authMiddleware, controller.deleteExperience);
+
+/* ------------------ EDUCATION ----------------- */
+
+// @route   PUT api/profiles/education
+// @desc    add profile education
+// @access  private
+router.put(
+  "/education",
+  authMiddleware,
+  validator.validateAddEducation,
+  controller.addEducation
+);
+
+// @route   DELETE api/profiles/education
+// @desc    delete education from profile
+// @access  private
+router.delete("/education/:id", authMiddleware, controller.deleteEducation);
 
 export default router;

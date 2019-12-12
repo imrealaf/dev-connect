@@ -5,6 +5,8 @@ import { IAuthRequest } from "../typedefs/Auth";
 import { User } from "../models/User";
 import { Profile } from "../models/Profile";
 
+/* ------------------ PROFILES ----------------- */
+
 export const getCurrentProfile = async (req: IAuthRequest, res: Response) => {
   try {
     const profile = await Profile.findOne({
@@ -159,6 +161,152 @@ export const deleteProfile = async (req: IAuthRequest, res: Response) => {
   } catch (error) {
     console.error(error.message);
 
+    res.status(500).send("Server error");
+  }
+};
+
+/* ------------------ EXPERIENCE ----------------- */
+
+export const addExperience = async (req: IAuthRequest, res: Response) => {
+  // Get errors array
+  const errors = validationResult(req);
+
+  // If errors, send 400 ..
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  // Destructure data
+  const { company, title, location, from, to, current, description } = req.body;
+
+  // Build experience object
+  const newExperience = {
+    company,
+    title,
+    location,
+    from,
+    to,
+    current,
+    description
+  };
+
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id
+    });
+
+    // Add experience to profile
+    profile.experience.unshift(newExperience);
+
+    // Save profile
+    await profile.save();
+
+    // return profile
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error");
+  }
+};
+
+export const deleteExperience = async (req: IAuthRequest, res: Response) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id
+    });
+
+    // Get the remove index
+    const removeIndex = profile.experience
+      .map((item: any) => item.id)
+      .indexOf(req.params.id);
+
+    // Remove experience from profile
+    profile.experience.splice(removeIndex, 1);
+
+    // Save profile
+    await profile.save();
+
+    // return profile
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error");
+  }
+};
+
+/* ------------------ EDUCATION ----------------- */
+
+export const addEducation = async (req: IAuthRequest, res: Response) => {
+  // Get errors array
+  const errors = validationResult(req);
+
+  // If errors, send 400 ..
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  // Destructure data
+  const {
+    school,
+    degree,
+    fieldOfStudy,
+    from,
+    to,
+    current,
+    description
+  } = req.body;
+
+  // Build education object
+  const newEducation = {
+    school,
+    degree,
+    fieldOfStudy,
+    from,
+    to,
+    current,
+    description
+  };
+
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id
+    });
+
+    // Add education to profile
+    profile.education.unshift(newEducation);
+
+    // Save profile
+    await profile.save();
+
+    // return profile
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error");
+  }
+};
+
+export const deleteEducation = async (req: IAuthRequest, res: Response) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id
+    });
+
+    // Get the remove index
+    const removeIndex = profile.education
+      .map((item: any) => item.id)
+      .indexOf(req.params.id);
+
+    // Remove education from profile
+    profile.education.splice(removeIndex, 1);
+
+    // Save profile
+    await profile.save();
+
+    // return profile
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
     res.status(500).send("Server error");
   }
 };
