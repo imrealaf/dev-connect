@@ -92,10 +92,11 @@ export const createProfile = async (req: IAuthRequest, res: Response) => {
   const profileFields = {} as any;
   profileFields.user = req.user.id;
   if (company) profileFields.company = company;
-  if (website) profileFields.company = company;
-  if (bio) profileFields.company = company;
+  if (website) profileFields.website = website;
+  if (location) profileFields.location = location;
+  if (bio) profileFields.bio = bio;
   if (status) profileFields.status = status;
-  if (githubUsername) profileFields.company = company;
+  if (githubUsername) profileFields.githubUsername = githubUsername;
   if (skills) {
     profileFields.skills = skills
       .split(",")
