@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 
-import config from "../config";
 import { IAuthRequest } from "../typedefs/Auth";
 import { User } from "../models/User";
 import { Profile } from "../models/Profile";
@@ -21,6 +18,47 @@ export const getCurrentProfile = async (req: IAuthRequest, res: Response) => {
     res.json(profile);
   } catch (error) {
     console.error(error.message);
+    res.status(500).send("Server error");
+  }
+};
+
+export const getAllProfiles = async (req: Request, res: Response) => {
+  try {
+    const profiles = await Profile.find().populate("user", [
+      "firstName",
+      "lastName",
+      "avatar"
+    ]);
+
+    if (!profiles) {
+      return res.status(400).json({ msg: "No profiles found" });
+    }
+
+    res.json(profiles);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error");
+  }
+};
+
+export const getProfileById = async (req: Request, res: Response) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.params.id
+    }).populate("user", ["firstName", "lastName", "avatar"]);
+
+    if (!profile) {
+      return res.status(400).json({ msg: "No profile found" });
+    }
+
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+
+    if (error.kind == "ObjectId") {
+      return res.status(400).json({ msg: "No profile found" });
+    }
+
     res.status(500).send("Server error");
   }
 };
@@ -100,6 +138,26 @@ export const createProfile = async (req: IAuthRequest, res: Response) => {
     // Server error ..
   } catch (error) {
     console.error(error.message);
+    res.status(500).send("Server error");
+  }
+};
+
+export const deleteProfile = async (req: IAuthRequest, res: Response) => {
+  try {
+    // Remove profile
+    await Profile.findOneAndRemove({
+      user: req.user.id
+    });
+
+    // Remove user
+    await User.findOneAndRemove({
+      _id: req.user.id
+    });
+
+    res.json({ msg: "User and all information deleted" });
+  } catch (error) {
+    console.error(error.message);
+
     res.status(500).send("Server error");
   }
 };
