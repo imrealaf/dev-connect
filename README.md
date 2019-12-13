@@ -2,6 +2,8 @@
 
 Social media site for developers built with MERN stack
 
+STATUS: Currently working on back-end. Front-end is still pending
+
 ## Back-End Includes
 
 - Node TypeScript
