@@ -1,6 +1,6 @@
 import app from "./app";
 
-// Comment
+// Create server
 const server = app.listen(app.get("port"), (): void => {
   console.log(
     "Server is running on port %d in %s mode",
