@@ -4,10 +4,11 @@ import compression from "compression"; // compresses requests
 import path from "path";
 
 import connectDB from "./db"; // uncomment if connecting to db
-import userRoutes from "./routes/users";
-import authRoutes from "./routes/auth";
-import profileRoutes from "./routes/profiles";
-import postRoutes from "./routes/posts";
+// import userRoutes from "./routes/users";
+// import authRoutes from "./routes/auth";
+// import profileRoutes from "./routes/profiles";
+// import postRoutes from "./routes/posts";
+import routes from "./routes";
 
 // Create Express server
 const app = express();
@@ -24,10 +25,9 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "public")));
 
 // Register routes
-app.use("/api/users", userRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/profiles", profileRoutes);
-app.use("/api/posts", postRoutes);
+for (const route in routes) {
+  app.use(`/api/${route}`, routes[route]);
+}
 
 // Handle React routing, return all requests to React app in production
 app.get("*", (req: Request, res: Response) => {
