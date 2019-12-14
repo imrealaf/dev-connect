@@ -5,7 +5,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import { User } from "../models/User";
-import config from "../config";
 
 export const createUser = async (req: Request, res: Response) => {
   // Get errors array

@@ -3,7 +3,6 @@ import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import config from "../config";
 import { IAuthRequest } from "../typedefs/Auth";
 import { User } from "../models/User";
 

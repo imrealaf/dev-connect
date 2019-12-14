@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import request from "request";
 
-import config from "../config";
 import { IAuthRequest } from "../typedefs/Auth";
 import { User } from "../models/User";
 import { Profile } from "../models/Profile";

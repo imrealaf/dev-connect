@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-import config from "../config";
 import { IAuthRequest } from "../typedefs/Auth";
 
 export default (req: IAuthRequest, res: Response, next: NextFunction) => {
