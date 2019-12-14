@@ -1,8 +1,11 @@
+/* Init dotenv secrets for non-prodution env */
 import "./secrets";
+
 import express, { Request, Response } from "express";
 import compression from "compression";
 import path from "path";
 
+import clientConfig from "./constants/client";
 import connectDB from "./db";
 import routes from "./routes";
 
@@ -18,7 +21,7 @@ app.use(compression());
 app.use(express.json());
 
 // Serve any static files
-app.use(express.static(path.resolve(__dirname, "public")));
+app.use(express.static(path.resolve(__dirname, clientConfig.staticPath)));
 
 // Register API routes
 for (const route in routes) {
@@ -27,7 +30,7 @@ for (const route in routes) {
 
 // Handle React routing, return all requests to React app in production
 app.get("*", (req: Request, res: Response) => {
-  res.sendFile(path.resolve(__dirname, "public/index.html"));
+  res.sendFile(path.resolve(__dirname, clientConfig.indexPath()));
 });
 
 export default app;
