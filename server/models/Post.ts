@@ -1,55 +1,22 @@
-import { Schema, Model, model } from "mongoose";
-import { IPost } from "../typedefs/Post";
+import { createSchema, Type, typedModel } from "ts-mongoose";
+import { UserSchema } from "./User";
 
-// User schema
-export const PostSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "user"
-  },
-  text: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String
-  },
-  avatar: {
-    type: String
-  },
-  likes: [
-    {
-      user: Schema.Types.ObjectId,
-      ref: "user"
-    }
-  ],
-  comments: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "user"
-      },
-      text: {
-        type: String,
-        required: true
-      },
-      name: {
-        type: String
-      },
-      avatar: {
-        type: String
-      },
-      date: {
-        type: Date,
-        default: Date.now
-      }
-    }
-  ],
-  date: {
-    type: Date,
-    default: Date.now
-  }
+export const PostSchema = createSchema({
+  user: Type.ref(Type.objectId()).to("user", UserSchema),
+  text: Type.string({ required: true }),
+  name: Type.string(),
+  avatar: Type.string(),
+  likes: Type.array().of({
+    user: Type.ref(Type.objectId()).to("Comment", UserSchema)
+  }),
+  comments: Type.array().of({
+    user: Type.ref(Type.objectId()).to("user", UserSchema),
+    text: Type.string({ required: true }),
+    name: Type.string(),
+    avatar: Type.string(),
+    date: Type.date({ default: Date.now as any })
+  }),
+  date: Type.date({ default: Date.now as any })
 });
 
-// Profile model
-export const Profile: Model<IPost> = model<IPost>("post", PostSchema);
+export const Post = typedModel("post", PostSchema);

@@ -17,7 +17,7 @@ export interface IPost extends Document {
   text: string;
   name?: string;
   avatar?: string;
-  likes: PostLike[];
-  comments: PostComment[];
+  likes?: PostLike[];
+  comments?: PostComment[];
   date: string;
 }

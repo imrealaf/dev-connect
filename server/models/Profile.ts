@@ -1,119 +1,41 @@
-import { Schema, Model, model } from "mongoose";
-import { IProfile } from "../typedefs/Profile";
+import { createSchema, Type, typedModel } from "ts-mongoose";
+import { UserSchema } from "./User";
 
-// Profile schema
-export const ProfileSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "user"
-  },
-  company: {
-    type: String
-  },
-  website: {
-    type: String
-  },
-  location: {
-    type: String
-  },
-  status: {
-    type: String,
-    required: true
-  },
-  skills: {
-    type: [String],
-    required: true
-  },
-  bio: {
-    type: String
-  },
-  githubUsername: {
-    type: String
-  },
-  experience: [
-    {
-      title: {
-        type: String,
-        required: true
-      },
-      company: {
-        type: String,
-        required: true
-      },
-      location: {
-        type: String
-      },
-      from: {
-        type: Date,
-        required: true
-      },
-      to: {
-        type: Date
-      },
-      current: {
-        type: Boolean,
-        default: false
-      },
-      description: {
-        type: String
-      }
-    }
-  ],
-  education: [
-    {
-      school: {
-        type: String,
-        required: true
-      },
-      degree: {
-        type: String,
-        required: true
-      },
-      fieldOfStudy: {
-        type: String,
-        required: true
-      },
-      from: {
-        type: Date,
-        required: true
-      },
-      to: {
-        type: Date
-      },
-      current: {
-        type: Boolean,
-        default: false
-      },
-      description: {
-        type: String
-      }
-    }
-  ],
+export const ProfileSchema = createSchema({
+  user: Type.ref(Type.objectId()).to("user", UserSchema),
+  company: Type.string(),
+  website: Type.string(),
+  location: Type.string(),
+  status: Type.string({ required: true }),
+  skills: Type.array({ required: true }).of(Type.string({ required: true })),
+  bio: Type.string(),
+  githubUsername: Type.string(),
+  experience: Type.array().of({
+    title: Type.string({ required: true }),
+    company: Type.string({ required: true }),
+    location: Type.string(),
+    from: Type.date({ required: true }),
+    to: Type.date(),
+    current: Type.string(),
+    description: Type.string()
+  }),
+  education: Type.array().of({
+    school: Type.string({ required: true }),
+    degree: Type.string({ required: true }),
+    fieldOfStudy: Type.string({ required: true }),
+    from: Type.date({ required: true }),
+    to: Type.date(),
+    current: Type.boolean({ default: false }),
+    description: Type.string()
+  }),
   social: {
-    youtube: {
-      type: String
-    },
-    twitter: {
-      type: String
-    },
-    facebook: {
-      type: String
-    },
-    linkedin: {
-      type: String
-    },
-    instagram: {
-      type: String
-    }
+    youtube: Type.string(),
+    twitter: Type.string(),
+    facebook: Type.string(),
+    linkedin: Type.string(),
+    instagram: Type.string()
   },
-  date: {
-    type: Date,
-    default: Date.now
-  }
+  date: Type.date({ default: Date.now as any })
 });
 
-// Profile model
-export const Profile: Model<IProfile> = model<IProfile>(
-  "profile",
-  ProfileSchema
-);
+export const Profile = typedModel("profile", ProfileSchema);

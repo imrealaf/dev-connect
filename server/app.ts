@@ -7,6 +7,7 @@ import connectDB from "./db"; // uncomment if connecting to db
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import profileRoutes from "./routes/profiles";
+import postRoutes from "./routes/posts";
 
 // Create Express server
 const app = express();
@@ -26,6 +27,7 @@ app.use(express.static(path.resolve(__dirname, "public")));
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/profiles", profileRoutes);
+app.use("/api/posts", postRoutes);
 
 // Handle React routing, return all requests to React app in production
 app.get("*", (req: Request, res: Response) => {
