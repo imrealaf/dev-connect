@@ -20,7 +20,7 @@ app.use(express.json());
 // Serve any static files
 app.use(express.static(path.resolve(__dirname, "public")));
 
-// Register routes
+// Register API routes
 for (const route in routes) {
   app.use(`/api/${route}`, routes[route]);
 }
