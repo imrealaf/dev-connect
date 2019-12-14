@@ -4,8 +4,7 @@ import request from "request";
 
 import githubConfig from "../constants/github";
 import { IAuthRequest } from "../typedefs/Auth";
-import { User } from "../models/User";
-import { Profile } from "../models/Profile";
+import { User, Profile } from "../models";
 
 /* ------------------ PROFILES ----------------- */
 

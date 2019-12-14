@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import { IAuthRequest } from "../typedefs/Auth";
-import { User } from "../models/User";
+import { User } from "../models";
 
 export const getAuthUser = async (req: IAuthRequest, res: Response) => {
   try {

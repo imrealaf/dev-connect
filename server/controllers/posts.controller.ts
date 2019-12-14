@@ -1,12 +1,8 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import request from "request";
 
 import { IAuthRequest } from "../typedefs/Auth";
-import { User } from "../models/User";
-import { Post } from "../models/Post";
-
-/* ------------------ PROFILES ----------------- */
+import { User, Post } from "../models";
 
 export const createPost = async (req: IAuthRequest, res: Response) => {
   // Get errors array
@@ -29,7 +25,7 @@ export const createPost = async (req: IAuthRequest, res: Response) => {
       text: req.body.text,
       name: `${firstName} ${lastName}`,
       avatar,
-      user: user
+      user: req.user.id
     };
 
     // Create and save post

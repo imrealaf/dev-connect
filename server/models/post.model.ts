@@ -1,6 +1,9 @@
 import { createSchema, Type, typedModel } from "ts-mongoose";
-import { UserSchema } from "./User";
+import { UserSchema } from "./user.model";
 
+/*
+    Create post schema
+*/
 export const PostSchema = createSchema({
   user: Type.ref(Type.objectId()).to("user", UserSchema),
   text: Type.string({ required: true }),
@@ -19,4 +22,7 @@ export const PostSchema = createSchema({
   date: Type.date({ default: Date.now as any })
 });
 
+/*
+    Export post schema
+*/
 export const Post = typedModel("post", PostSchema);
