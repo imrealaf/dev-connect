@@ -1,14 +1,5 @@
-import { Document, Schema, Model, model } from "mongoose";
-
-// User interface
-export interface IUserModel extends Document {
-  name: string;
-  email: string;
-  password: string;
-  avatar: string;
-  date: Date;
-  fullName(): string;
-}
+import { Schema, Model, model } from "mongoose";
+import { IUser } from "../typedefs/User";
 
 // User schema
 export const UserSchema = new Schema({
@@ -43,4 +34,4 @@ UserSchema.methods.fullName = function(): string {
 };
 
 // User model
-export const User: Model<IUserModel> = model<IUserModel>("user", UserSchema);
+export const User: Model<IUser> = model<IUser>("user", UserSchema);

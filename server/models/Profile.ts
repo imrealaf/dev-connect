@@ -1,22 +1,7 @@
-import { Document, Schema, Model, model, Mongoose } from "mongoose";
+import { Schema, Model, model } from "mongoose";
+import { IProfile } from "../typedefs/Profile";
 
-// Profile interface
-export interface IProfileModel extends Document {
-  user: Schema.Types.ObjectId;
-  company?: string;
-  website?: string;
-  location?: string;
-  status: string;
-  skills: string[];
-  bio: string;
-  githubUsername: string;
-  experience: any[];
-  education: any[];
-  social: any;
-  date: Date;
-}
-
-// User schema
+// Profile schema
 export const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -128,7 +113,7 @@ export const ProfileSchema = new Schema({
 });
 
 // Profile model
-export const Profile: Model<IProfileModel> = model<IProfileModel>(
+export const Profile: Model<IProfile> = model<IProfile>(
   "profile",
   ProfileSchema
 );
