@@ -1,13 +1,9 @@
 import "./secrets";
 import express, { Request, Response } from "express";
-import compression from "compression"; // compresses requests
+import compression from "compression";
 import path from "path";
 
-import connectDB from "./db"; // uncomment if connecting to db
-// import userRoutes from "./routes/users";
-// import authRoutes from "./routes/auth";
-// import profileRoutes from "./routes/profiles";
-// import postRoutes from "./routes/posts";
+import connectDB from "./db";
 import routes from "./routes";
 
 // Create Express server
