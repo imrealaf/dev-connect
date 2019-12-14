@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 
+import mongoConfig from "./constants/mongo";
+
 export default async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true
-    });
+    await mongoose.connect(process.env.MONGO_URI, mongoConfig);
     console.log("MongoDB connected..");
   } catch (error) {
     console.log(error.message);
