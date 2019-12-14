@@ -1,3 +1,4 @@
+import "./secrets";
 import express, { Request, Response } from "express";
 import compression from "compression"; // compresses requests
 import path from "path";

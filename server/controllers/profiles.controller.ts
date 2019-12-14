@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
+import request from "request";
 
+import config from "../config";
 import { IAuthRequest } from "../typedefs/Auth";
 import { User } from "../models/User";
 import { Profile } from "../models/Profile";
@@ -161,6 +163,34 @@ export const deleteProfile = async (req: IAuthRequest, res: Response) => {
   } catch (error) {
     console.error(error.message);
 
+    res.status(500).send("Server error");
+  }
+};
+
+export const getGithubRepos = async (req: Request, res: Response) => {
+  try {
+    // Set request options
+    const options = {
+      uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`,
+      method: "GET",
+      headers: { "user-agent": "node.js" }
+    };
+
+    // Make request
+    request(options, (error, response, body) => {
+      // If error ..
+      if (error) console.error(error);
+
+      // If status isn't 200, 404 not found
+      if (response.statusCode !== 200) {
+        return res.status(404).json({ msg: "No github profile found" });
+      }
+
+      // Send back parsed reponse
+      res.json(JSON.parse(body));
+    });
+  } catch (error) {
+    console.error(error.message);
     res.status(500).send("Server error");
   }
 };

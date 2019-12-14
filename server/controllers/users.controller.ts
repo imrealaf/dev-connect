@@ -62,7 +62,7 @@ export const createUser = async (req: Request, res: Response) => {
         }
       },
       // Secret
-      config.jwtSecret,
+      process.env.JWT_SECRET,
       // Expiry
       { expiresIn: 360000 },
       // Callback

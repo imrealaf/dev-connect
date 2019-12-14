@@ -17,7 +17,7 @@ export default (req: IAuthRequest, res: Response, next: NextFunction) => {
 
   // Verify token
   try {
-    const decoded = jwt.verify(token, config.jwtSecret) as any;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET) as any;
     req.user = decoded.user;
     next();
 

@@ -38,6 +38,11 @@ router.post(
 // @access  private
 router.delete("/", authMiddleware, controller.deleteProfile);
 
+// @route   GET api/profiles/github/:username
+// @desc    get repos from github
+// @access  public
+router.get("/github/:username", controller.getGithubRepos);
+
 /* ------------------ EXPERIENCE ----------------- */
 
 // @route   PUT api/profiles/experience
