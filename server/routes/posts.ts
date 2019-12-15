@@ -41,4 +41,23 @@ router.put("/like/:id", authMiddleware, controller.likePost);
 // @access  private
 router.put("/unlike/:id", authMiddleware, controller.unlikePost);
 
+// @route   POST api/posts/comment/:id
+// @desc    comment on a post
+// @access  private
+router.post(
+  "/comment/:id",
+  authMiddleware,
+  validator.validateAddComment,
+  controller.addComment
+);
+
+// @route   DELETE api/posts/comment/:id/:comment_id
+// @desc    delete a comment
+// @access  private
+router.delete(
+  "/comment/:id/:comment_id",
+  authMiddleware,
+  controller.deleteComment
+);
+
 export default router;

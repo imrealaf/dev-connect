@@ -5,3 +5,9 @@ export const validateCreatePost = [
     .not()
     .isEmpty()
 ];
+
+export const validateAddComment = [
+  check("text", "Post text is required")
+    .not()
+    .isEmpty()
+];

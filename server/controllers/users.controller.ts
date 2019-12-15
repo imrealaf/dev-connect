@@ -4,6 +4,7 @@ import gravatar from "gravatar";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+import responses from "../constants/responses";
 import { User } from "../models";
 
 export const createUser = async (req: Request, res: Response) => {
@@ -74,6 +75,6 @@ export const createUser = async (req: Request, res: Response) => {
     // Server error ..
   } catch (error) {
     console.error();
-    res.status(500).send("Server error:" + error.message);
+    res.status(500).send(responses.error500);
   }
 };

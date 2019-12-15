@@ -3,6 +3,7 @@ import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+import responses from "../constants/responses";
 import { IAuthRequest } from "../typedefs/Auth";
 import { User } from "../models";
 
@@ -12,7 +13,7 @@ export const getAuthUser = async (req: IAuthRequest, res: Response) => {
     res.json(user);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
 
@@ -35,7 +36,7 @@ export const postAuthUser = async (req: Request, res: Response) => {
     // If user exists ..
     if (!user) {
       return res.status(400).json({
-        errors: [{ msg: "Invalid credentials" }]
+        errors: [{ msg: responses.error400Auth }]
       });
     }
 
@@ -45,7 +46,7 @@ export const postAuthUser = async (req: Request, res: Response) => {
     // If password does not match ..
     if (!isMatch) {
       return res.status(400).json({
-        errors: [{ msg: "Invalid credentials" }]
+        errors: [{ msg: responses.error400Auth }]
       });
     }
 
@@ -71,6 +72,6 @@ export const postAuthUser = async (req: Request, res: Response) => {
     // Server error ..
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };

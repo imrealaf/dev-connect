@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import request from "request";
 
+import responses from "../constants/responses";
 import githubConfig from "../constants/github";
 import { IAuthRequest } from "../typedefs/Auth";
 import { User, Profile } from "../models";
@@ -15,13 +16,13 @@ export const getCurrentProfile = async (req: IAuthRequest, res: Response) => {
     }).populate("user", ["firstName", "lastName", "avatar"]);
 
     if (!profile) {
-      return res.status(400).json({ msg: "There is no profile for this user" });
+      return res.status(404).json({ msg: responses.error404("profile") });
     }
 
     res.json(profile);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
 
@@ -34,13 +35,13 @@ export const getAllProfiles = async (req: Request, res: Response) => {
     ]);
 
     if (!profiles) {
-      return res.status(400).json({ msg: "No profiles found" });
+      return res.status(404).json({ msg: responses.error404("profiles") });
     }
 
     res.json(profiles);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
 
@@ -51,7 +52,7 @@ export const getProfileById = async (req: Request, res: Response) => {
     }).populate("user", ["firstName", "lastName", "avatar"]);
 
     if (!profile) {
-      return res.status(400).json({ msg: "No profile found" });
+      return res.status(400).json({ msg: responses.error404("profile") });
     }
 
     res.json(profile);
@@ -59,10 +60,10 @@ export const getProfileById = async (req: Request, res: Response) => {
     console.error(error.message);
 
     if (error.kind == "ObjectId") {
-      return res.status(400).json({ msg: "No profile found" });
+      return res.status(400).json({ msg: responses.error404("profile") });
     }
 
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
 
@@ -142,7 +143,7 @@ export const createProfile = async (req: IAuthRequest, res: Response) => {
     // Server error ..
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
 
@@ -158,11 +159,11 @@ export const deleteProfile = async (req: IAuthRequest, res: Response) => {
       _id: req.user.id
     });
 
-    res.json({ msg: "User and all information deleted" });
+    res.json({ msg: responses.successDelete("user and profile") });
   } catch (error) {
     console.error(error.message);
 
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
 
@@ -182,7 +183,9 @@ export const getGithubRepos = async (req: Request, res: Response) => {
 
       // If status isn't 200, 404 not found
       if (response.statusCode !== 200) {
-        return res.status(404).json({ msg: "No github profile found" });
+        return res
+          .status(404)
+          .json({ msg: responses.error404("github profile") });
       }
 
       // Send back parsed reponse
@@ -190,7 +193,7 @@ export const getGithubRepos = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
 
@@ -234,7 +237,7 @@ export const addExperience = async (req: IAuthRequest, res: Response) => {
     res.json(profile);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
 
@@ -259,7 +262,7 @@ export const deleteExperience = async (req: IAuthRequest, res: Response) => {
     res.json(profile);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
 
@@ -311,7 +314,7 @@ export const addEducation = async (req: IAuthRequest, res: Response) => {
     res.json(profile);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
 
@@ -336,6 +339,6 @@ export const deleteEducation = async (req: IAuthRequest, res: Response) => {
     res.json(profile);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send(responses.error500);
   }
 };
