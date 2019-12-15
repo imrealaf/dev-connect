@@ -10,7 +10,7 @@ export const PostSchema = createSchema({
   name: Type.string(),
   avatar: Type.string(),
   likes: Type.array().of({
-    user: Type.ref(Type.objectId()).to("Comment", UserSchema)
+    user: Type.ref(Type.objectId()).to("user", UserSchema)
   }),
   comments: Type.array().of({
     user: Type.ref(Type.objectId()).to("user", UserSchema),
