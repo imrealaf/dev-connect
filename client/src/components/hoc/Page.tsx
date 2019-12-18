@@ -13,6 +13,7 @@ import { Helmet } from "react-helmet";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import config from "../../constants/config";
+import * as routes from "../../constants/routes";
 import { getCurrentRoute } from "../../utils";
 
 // Page props
@@ -28,7 +29,7 @@ const Page: React.FC<Props> = ({ children, title, descrip, location }) => {
    *  On route change ..
    */
   useEffect(() => {
-    setCurrentRoute(getCurrentRoute(location));
+    setCurrentRoute(getCurrentRoute(location, "landing"));
   }, [location, setCurrentRoute]);
 
   /*
@@ -42,7 +43,15 @@ const Page: React.FC<Props> = ({ children, title, descrip, location }) => {
       >
         <title>{title ? title : ""}</title>
         {descrip ? <meta name="description" content={descrip} /> : null}
-        <body data-route={currentRoute} />
+        <body
+          className={
+            location.pathname === routes.LOGIN ||
+            location.pathname === routes.SIGN_UP
+              ? "bg-light"
+              : "bg-white"
+          }
+          data-route={currentRoute}
+        />
       </Helmet>
       {children}
     </React.Fragment>

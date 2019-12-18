@@ -20,10 +20,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Routes/pages
 import * as routes from "../constants/routes";
-import { Home } from "../pages";
+import { Landing, Login, SignUp } from "../pages";
 
 // Components
 import { Preload } from "./ui";
+import { Navigation } from "./";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   /*
@@ -37,19 +38,30 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
   return (
     <React.Fragment>
       {/* Preload */}
-      <Preload>
+      <Preload animateOut={true} color="primary">
         <FontAwesomeIcon
-          className="text-primary"
-          icon={["fas", "gem"]}
+          className="text-white"
+          icon={["fas", "code"]}
           size="4x"
         />
       </Preload>
 
+      {location.pathname === routes.LOGIN ||
+      location.pathname === routes.SIGN_UP ? null : (
+        <Navigation bg="primary" variant="dark" fixed="top" />
+      )}
+
       {/* Main content */}
       <main id="main" role="main">
         <Switch>
-          <Route exact path={routes.HOME}>
-            <Home />
+          <Route exact path={routes.LANDING}>
+            <Landing />
+          </Route>
+          <Route exact path={routes.LOGIN}>
+            <Login />
+          </Route>
+          <Route exact path={routes.SIGN_UP}>
+            <SignUp />
           </Route>
         </Switch>
       </main>

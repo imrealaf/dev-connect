@@ -7,5 +7,6 @@
 
 import Preloader from "./Preloader";
 import Preload from "./Preload";
+import Hero from "./Hero";
 
-export { Preloader, Preload };
+export { Preloader, Preload, Hero };

@@ -5,6 +5,8 @@
  *  @desc this file just exports all page components into one object so they can be imported easier
  */
 
-import Home from "./Home";
+import Landing from "./Landing";
+import Login from "./Login";
+import SignUp from "./SignUp";
 
-export { Home };
+export { Landing, Login, SignUp };

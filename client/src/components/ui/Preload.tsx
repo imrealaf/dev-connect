@@ -5,26 +5,63 @@
  *  @desc covers the DOM and acts a a preloader while the app loads
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import config from "../../constants/config";
+import { ThemeColor } from "../../types/Theme";
+import { onTransitionEnd } from "../../utils";
 
-const Preload: React.FC = ({ children }) => {
+// Preload props
+interface Props {
+  color: ThemeColor;
+  animateOut: boolean;
+}
+
+const Preload: React.FC<Props> & { defaultProps: Partial<Props> } = ({
+  children,
+  color,
+  animateOut
+}) => {
   const [show, setShow] = useState(true);
+  const ref = useRef(null) as any;
 
   /*
    *  On mount ..
    */
   useEffect(() => {
+    document.body.style.overflow = "hidden";
     setTimeout(() => {
-      setShow(false);
+      if (animateOut) {
+        ref.current.style.opacity = 0;
+        onTransitionEnd(ref.current, () => {
+          document.body.style.overflow = "";
+          setShow(false);
+        });
+      } else {
+        document.body.style.overflow = "";
+        setShow(false);
+      }
     }, config.preload.delayTime);
   }, []);
+
+  const className = (): string => {
+    const classes = ["preload", `bg-${color}`];
+    return classes.join(" ");
+  };
 
   /*
    *  Render
    */
-  return show ? <div className="preload">{children}</div> : null;
+  return show ? (
+    <div className={className()} ref={ref}>
+      {children}
+    </div>
+  ) : null;
+};
+
+Preload.defaultProps = {
+  color: "light",
+  animateOut: false
 };
 
 export default Preload;

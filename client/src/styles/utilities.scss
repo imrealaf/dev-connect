@@ -1,0 +1,15 @@
+// Backgrounds
+
+@each $color, $value in $grays {
+  @include bg-variant(".bg-gray-#{$color}", $value, true);
+}
+
+.bg-black {
+  background: $black !important;
+}
+
+// Font
+
+.font-light {
+  font-weight: 300 !important;
+}

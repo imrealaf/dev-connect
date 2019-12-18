@@ -8,7 +8,7 @@ export const UserSchema = createSchema({
   lastName: Type.string({ required: true }),
   email: Type.string({ required: true, unique: true }),
   password: Type.string({ required: true }),
-  avatar: Type.string({ required: true }),
+  avatar: Type.string(),
   date: Type.date({ default: Date.now as any })
 });
 

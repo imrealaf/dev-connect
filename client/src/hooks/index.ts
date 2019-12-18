@@ -6,5 +6,7 @@
  */
 
 import useModal from "./useModal";
+import useLogin from "./useLogin";
+import useSignUp from "./useSignUp";
 
-export { useModal };
+export { useModal, useLogin, useSignUp };

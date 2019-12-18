@@ -4,4 +4,6 @@ export type ThemeColor =
   | "info"
   | "warning"
   | "success"
-  | "danger";
+  | "danger"
+  | "light"
+  | "dark";

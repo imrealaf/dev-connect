@@ -1,0 +1,15 @@
+.btn-pill {
+  border-radius: $grid-gutter-width;
+  padding-left: $btn-padding-x * 1.5;
+  padding-right: $btn-padding-x * 1.5;
+
+  &.btn-sm {
+    padding-left: $btn-padding-x-sm * 1.5;
+    padding-right: $btn-padding-x-sm * 1.5;
+  }
+
+  &.btn-lg {
+    padding-left: $btn-padding-x-lg * 1.5;
+    padding-right: $btn-padding-x-lg * 1.5;
+  }
+}
