@@ -16,7 +16,7 @@ import * as routes from "../constants/routes";
 import { Page } from "../components/hoc";
 import { SignUpForm } from "../components";
 
-const Login: React.FC = () => {
+const SignUp: React.FC = () => {
   return (
     <Page title="Sign Up">
       <Container className="text-center py-2">
@@ -51,4 +51,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default SignUp;

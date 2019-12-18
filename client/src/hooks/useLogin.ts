@@ -12,14 +12,16 @@ import validator from "validator";
 import axios from "axios";
 
 import config from "../constants/config";
+import * as routes from "../constants/routes";
 import { RequestError } from "../types/Request";
+import { LoginFormState } from "../types/Auth";
 
-const initialData = {
-  username: "",
+const initialData: LoginFormState = {
+  email: "",
   password: ""
 };
 
-export default () => {
+export default (success: any, fail: any) => {
   // Get history
   const history = useHistory();
   /* 
@@ -40,7 +42,7 @@ export default () => {
     } else {
       setValid(false);
     }
-  }, [data]);
+  });
 
   /* 
     On change handler
@@ -48,6 +50,7 @@ export default () => {
   const onChangeHandler = (e: FormEvent) => {
     const target = e.target as HTMLFormElement;
     setData({ ...data, [target.name]: target.value.trim() });
+    if (hasError() && submitted) setErrors([]);
   };
 
   /* 
@@ -69,19 +72,33 @@ export default () => {
     Submit function
   */
   const submit = async () => {
+    // Login success ..
     try {
       const response = await axios.post(
-        "/api/users",
+        "/api/auth",
         JSON.stringify(data),
         config.http.postConfig
       );
+
+      // Set not pending
       setPending(false);
-      console.log(response.data);
+
+      // Dispatch success action
+      success(response.data);
+
+      // Redirect to dashboard
+      history.push(routes.DASHBOARD);
+
+      // Login fail ..
     } catch (error) {
+      // Get and log errors
       const errors: RequestError[] = error.response.data.errors;
       console.error(errors);
+
+      // Set and dispatch errors
       setPending(false);
       setErrors(errors);
+      fail();
     }
   };
 
@@ -89,7 +106,7 @@ export default () => {
     Validate username function
   */
   const validUsername = () => {
-    return data.username && validator.isEmail(data.username);
+    return data.email && validator.isEmail(data.email);
   };
 
   /* 
@@ -99,6 +116,14 @@ export default () => {
     return (
       data.password && data.password.length >= config.auth.minPasswordLength
     );
+  };
+
+  const hasError = () => {
+    return errors.length > 0;
+  };
+
+  const getError = (): RequestError => {
+    return errors[0];
   };
 
   /* 
@@ -113,6 +138,8 @@ export default () => {
     onSubmitHandler,
     onChangeHandler,
     validUsername,
-    validPassword
+    validPassword,
+    hasError,
+    getError
   };
 };

@@ -5,9 +5,11 @@
  *  @desc contains configurations for the app that can be tweaked and altered
  */
 
+const NAMESPACE = "dc";
+
 export default {
   appName: "DevConnect",
-  namespace: "dc",
+  namespace: NAMESPACE,
   meta: {
     titleSeperator: "-"
   },
@@ -22,7 +24,8 @@ export default {
         passwordMinLength: `Password must be at least ${this.minPasswordLength} chars`,
         passwordMatch: `Confirmed password must match the above`
       };
-    }
+    },
+    tokenStorageName: `${NAMESPACE}_token`
   },
   http: {
     requestDelay: 2000,

@@ -12,8 +12,9 @@ import axios from "axios";
 
 import config from "../constants/config";
 import { RequestError } from "../types/Request";
+import { SignUpFormState } from "../types/Auth";
 
-const initialData = {
+const initialData: SignUpFormState = {
   firstName: "",
   lastName: "",
   email: "",
@@ -21,7 +22,7 @@ const initialData = {
   passwordConfirm: ""
 };
 
-export default () => {
+export default (success: any, fail: any) => {
   /* 
     Create state
   */
@@ -114,12 +115,13 @@ export default () => {
         config.http.postConfig
       );
       setPending(false);
-      console.log(response.data);
+      success(response.data);
     } catch (error) {
       const errors: RequestError[] = error.response.data.errors;
       console.error(errors);
       setPending(false);
       setErrors(errors);
+      fail();
     }
   };
 

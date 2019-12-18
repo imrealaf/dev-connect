@@ -12,8 +12,13 @@ import { Form, Button } from "react-bootstrap";
 import config from "../constants/config";
 import { Preloader } from "../components/ui";
 import { useSignUp } from "../hooks";
+import { signUpSuccess, signUpFail } from "../redux/actions/auth.actions";
+import { ISignupFormProps } from "../types/Auth";
 
-const SignUpForm: React.FC = () => {
+const SignUpForm: React.FC<ISignupFormProps> = ({
+  signUpSuccess,
+  signUpFail
+}) => {
   /*
    *  Element refs
    */
@@ -28,7 +33,7 @@ const SignUpForm: React.FC = () => {
   /*
    *  Sign up api
    */
-  const signUp = useSignUp();
+  const signUp = useSignUp(signUpSuccess, signUpFail);
 
   /*
    *  Render
@@ -149,4 +154,6 @@ const SignUpForm: React.FC = () => {
   );
 };
 
-export default connect()(SignUpForm);
+const mapDispatchToProps = { signUpSuccess, signUpFail };
+
+export default connect(null, mapDispatchToProps)(SignUpForm);

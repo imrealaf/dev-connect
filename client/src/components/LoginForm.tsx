@@ -6,23 +6,20 @@
  */
 
 import React, { useRef } from "react";
+import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 
 import config from "../constants/config";
 import { Preloader } from "../components/ui";
 import { useLogin } from "../hooks";
+import { loginSuccess, loginFail } from "../redux/actions/auth.actions";
+import { ILoginFormProps } from "../types/Auth";
 
-const LoginForm: React.FC = () => {
-  /*
-   *  Element refs
-   */
-  const usernameRef = useRef() as any;
-  const passwordRef = useRef() as any;
-
+const LoginForm: React.FC<ILoginFormProps> = ({ loginSuccess, loginFail }) => {
   /*
    *  Login api
    */
-  const login = useLogin();
+  const login = useLogin(loginSuccess, loginFail);
 
   /*
    *  Render
@@ -35,45 +32,36 @@ const LoginForm: React.FC = () => {
         className="login-form"
         style={login.pending ? { display: "none" } : {}}
       >
+        {/* Error text */}
+        {login.hasError() ? (
+          <Form.Text className="text-center text-danger mb-3">
+            <strong>Error:</strong> {login.getError().msg}
+          </Form.Text>
+        ) : null}
+
         {/* Username field */}
-        <Form.Group controlId="username">
+        <Form.Group controlId="email">
           <Form.Control
-            isInvalid={!login.validUsername() && login.submitted}
             className="text-center"
             type="email"
-            name="username"
+            name="email"
             placeholder="Enter username"
-            ref={usernameRef}
             onChange={login.onChangeHandler}
             size="lg"
           />
-          {/* Error text */}
-          {!login.validUsername() && login.submitted ? (
-            <Form.Text className="text-left text-danger">
-              {config.auth.validationErrors().usernameValidEmail}
-            </Form.Text>
-          ) : null}
         </Form.Group>
 
         {/* Password field */}
-        {login.data.username && login.validUsername() ? (
+        {login.data.email && login.validUsername() ? (
           <Form.Group controlId="password">
             <Form.Control
-              isInvalid={!login.validPassword() && login.submitted}
               className="text-center"
               type="password"
               name="password"
               placeholder="Enter password"
-              ref={passwordRef}
               onChange={login.onChangeHandler}
               size="lg"
             />
-            {/* Error text */}
-            {!login.validPassword() && login.submitted ? (
-              <Form.Text className="text-left text-danger">
-                {config.auth.validationErrors().passwordMinLength}
-              </Form.Text>
-            ) : null}
           </Form.Group>
         ) : null}
 
@@ -93,4 +81,6 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+const mapDispatchToProps = { loginSuccess, loginFail };
+
+export default connect(null, mapDispatchToProps)(LoginForm);
