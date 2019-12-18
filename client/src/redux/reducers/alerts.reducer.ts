@@ -1,10 +1,11 @@
+import { AnyAction } from "redux";
+
 import * as types from "../actionTypes";
-import { IAction } from "../../types/Redux";
 import { IAlert } from "../../types/Alert";
 
 const initialState = [] as any;
 
-export default (state: any = initialState, action: IAction) => {
+export default (state: any = initialState, action: AnyAction) => {
   const { type, payload } = action;
 
   switch (type) {
