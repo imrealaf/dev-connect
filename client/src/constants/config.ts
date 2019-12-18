@@ -34,6 +34,11 @@ export default {
       headers: {
         "Content-Type": "application/json"
       }
+    },
+    authConfig: {
+      headers: {
+        "Content-Type": "application/json"
+      }
     }
   }
 };

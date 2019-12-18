@@ -14,19 +14,25 @@ import config from "../constants/config";
 import * as routes from "../constants/routes";
 import { NavigationLink } from "../types/Navigation";
 import { publicNav, privateNav } from "../constants/navigation";
+import { useLogout } from "../hooks";
 
-// Navifation props
-interface Props {}
+interface INavigationProps extends NavbarProps {
+  isAuthenticated: boolean;
+}
 
-const Navigation: React.FC<NavbarProps> & {
-  defaultProps: Partial<NavbarProps>;
-} = props => {
+const Navigation: React.FC<INavigationProps> & {
+  defaultProps: Partial<INavigationProps>;
+} = ({ isAuthenticated, ...rest }) => {
+  /*
+   *  Logout function
+   */
+  const logout = useLogout();
+
   /*
    *  Get items function
    */
   const getItems = () => {
-    //const items = user.data ? privateNav : publicNav;
-    const items = publicNav;
+    const items = isAuthenticated ? privateNav : publicNav;
     return items.map((item: NavigationLink, i) => {
       return (
         <React.Fragment key={i}>
@@ -42,9 +48,12 @@ const Navigation: React.FC<NavbarProps> & {
    *  Render
    */
   return (
-    <Navbar className="navigation" {...props}>
+    <Navbar className="navigation" {...rest}>
       <Container>
-        <Link to="" className="navbar-brand text-white">
+        <Link
+          to={isAuthenticated ? routes.DASHBOARD : routes.LANDING}
+          className="navbar-brand text-white"
+        >
           <FontAwesomeIcon className="mr-1" icon={["fas", "code"]} size="1x" />{" "}
           <strong>{config.appName}</strong>
         </Link>
@@ -52,14 +61,25 @@ const Navigation: React.FC<NavbarProps> & {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             {getItems()}
-            <NavLink className="nav-link" to={routes.LOGIN}>
-              <FontAwesomeIcon
-                className="mr-1"
-                icon={["fas", "lock"]}
-                size="xs"
-              />{" "}
-              Log In
-            </NavLink>
+            {isAuthenticated ? (
+              <Nav.Link className="nav-link" onClick={logout}>
+                <FontAwesomeIcon
+                  className="mr-1"
+                  icon={["fas", "unlock"]}
+                  size="xs"
+                />{" "}
+                Log Out
+              </Nav.Link>
+            ) : (
+              <Link className="nav-link" to={routes.LOGIN}>
+                <FontAwesomeIcon
+                  className="mr-1"
+                  icon={["fas", "lock"]}
+                  size="xs"
+                />{" "}
+                Log In
+              </Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

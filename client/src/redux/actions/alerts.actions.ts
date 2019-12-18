@@ -1,6 +1,7 @@
 import uuid from "uuid";
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import axios from "axios";
 
 import * as types from "../actionTypes";
 import { IAlert } from "../../types/Alert";
