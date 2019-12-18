@@ -6,6 +6,7 @@
  */
 
 import React, { useRef } from "react";
+import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 
 import config from "../constants/config";
@@ -148,4 +149,4 @@ const SignUpForm: React.FC = () => {
   );
 };
 
-export default SignUpForm;
+export default connect()(SignUpForm);

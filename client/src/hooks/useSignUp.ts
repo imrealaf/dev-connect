@@ -2,7 +2,7 @@
  *  useLogin
  *
  *  @type Custom Hook
- *  @desc handles login form validation and submission
+ *  @desc handles sign up form validation, errors and submission
  */
 import { FormEvent } from "react";
 import { useState, useEffect } from "react";

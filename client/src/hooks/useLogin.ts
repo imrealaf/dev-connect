@@ -9,10 +9,10 @@ import { FormEvent } from "react";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import validator from "validator";
+import axios from "axios";
 
 import config from "../constants/config";
-import * as routes from "../constants/routes";
-import * as authCodes from "../constants/authCodes";
+import { RequestError } from "../types/Request";
 
 const initialData = {
   username: "",
@@ -26,7 +26,7 @@ export default () => {
     Create state
   */
   const [data, setData] = useState(initialData);
-  const [error, setError] = useState(false);
+  const [errors, setErrors] = useState([]) as any;
   const [valid, setValid] = useState(false);
   const [pending, setPending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -41,20 +41,6 @@ export default () => {
       setValid(false);
     }
   }, [data]);
-
-  /* 
-    Login function
-  */
-  const login = async () => {
-    // try {
-    //   await authModel.doSignInWithEmailAndPassword(username, password);
-    //   if (submitted) setPending(false);
-    //   history.push(routes.DASHBOARD);
-    // } catch (error) {
-    //   if (error) setPending(false);
-    //   handleAuthError(error);
-    // }
-  };
 
   /* 
     On change handler
@@ -75,7 +61,27 @@ export default () => {
 
     if (valid) {
       setPending(true);
-      setTimeout(login, 2000);
+      setTimeout(submit, 2000);
+    }
+  };
+
+  /* 
+    Submit function
+  */
+  const submit = async () => {
+    try {
+      const response = await axios.post(
+        "/api/users",
+        JSON.stringify(data),
+        config.http.postConfig
+      );
+      setPending(false);
+      console.log(response.data);
+    } catch (error) {
+      const errors: RequestError[] = error.response.data.errors;
+      console.error(errors);
+      setPending(false);
+      setErrors(errors);
     }
   };
 
@@ -96,31 +102,11 @@ export default () => {
   };
 
   /* 
-    Handle auth error function
-  */
-  const handleAuthError = (authError: any) => {
-    // switch (authError.code) {
-    //   // Focus on username
-    //   case authCodes.ERROR_USERNAME:
-    //   case authCodes.ERROR_NOT_FOUND:
-    //     usernameRef.current.focus();
-    //     setUsernameError(authError.message);
-    //     break;
-    //   // Focus on password
-    //   case authCodes.ERROR_PASSWORD:
-    //   case authCodes.ERROR_TOO_MANY_ATTEMPTS:
-    //     passwordRef.current.focus();
-    //     setPasswordError(authError.message);
-    //     break;
-    // }
-  };
-
-  /* 
     Return data for component consumption
   */
   return {
     data,
-    error,
+    errors,
     valid,
     pending,
     submitted,
