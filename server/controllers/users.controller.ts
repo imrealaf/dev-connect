@@ -26,7 +26,12 @@ export const createUser = async (req: Request, res: Response) => {
     // If user exists ..
     if (user) {
       return res.status(400).json({
-        errors: [{ msg: "User already exists" }]
+        errors: [
+          {
+            msg: "Email/username is already assigned to a profile",
+            param: "email"
+          }
+        ]
       });
     }
 

@@ -8,8 +8,10 @@ import { FormEvent } from "react";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import validator from "validator";
+import axios from "axios";
 
 import config from "../constants/config";
+import { RequestError } from "../types/Request";
 
 const initialData = {
   firstName: "",
@@ -24,7 +26,7 @@ export default () => {
     Create state
   */
   const [data, setData] = useState(initialData);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([]) as any;
   const [valid, setValid] = useState(false) as any;
   const [pending, setPending] = useState(false) as any;
   const [submitted, setSubmitted] = useState(false) as any;
@@ -46,10 +48,10 @@ export default () => {
     } else {
       setValid(false);
     }
-  }, [data]);
+  });
 
   /*
-   *  Validations
+   *  Error handling functions
    */
 
   const passwordNotValid = () => {
@@ -62,18 +64,64 @@ export default () => {
     return data.passwordConfirm && data.password !== data.passwordConfirm;
   };
 
+  const hasError = (name: string) => {
+    if (errors.length > 0) {
+      const error = errors.filter(
+        (error: RequestError) => error.param === name
+      );
+      return error.length === 1 ? true : false;
+    } else {
+      return false;
+    }
+  };
+
+  const getError = (name: string): RequestError => {
+    return errors.filter((error: RequestError) => error.param === name)[0];
+  };
+
   /* 
     On change handler
   */
   const onChangeHandler = (e: FormEvent) => {
     const target = e.target as HTMLFormElement;
     setData({ ...data, [target.name]: target.value.trim() });
+    if (hasError(target.name) && submitted) setErrors([]);
   };
 
   /* 
     On submit handler
   */
-  const onSubmitHandler = (e: FormEvent) => {};
+  const onSubmitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setSubmitted(true);
+
+    if (valid) {
+      setPending(true);
+      setTimeout(submit, config.http.requestDelay);
+    }
+  };
+
+  /* 
+    Submit
+  */
+  const submit = async () => {
+    try {
+      const response = await axios.post(
+        "/api/users",
+        JSON.stringify(data),
+        config.http.postConfig
+      );
+      setPending(false);
+      console.log(response.data);
+    } catch (error) {
+      const errors: RequestError[] = error.response.data.errors;
+      console.error(errors);
+      setPending(false);
+      setErrors(errors);
+    }
+  };
 
   /* 
     Return data for component consumption
@@ -87,6 +135,8 @@ export default () => {
     onChangeHandler,
     onSubmitHandler,
     passwordNotValid,
-    passwordsDontMatch
+    passwordsDontMatch,
+    hasError,
+    getError
   };
 };

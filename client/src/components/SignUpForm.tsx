@@ -72,6 +72,7 @@ const SignUpForm: React.FC = () => {
         <Form.Group controlId="email">
           <Form.Label className="sr-only">Email</Form.Label>
           <Form.Control
+            isInvalid={signUp.hasError("email")}
             className="text-center"
             type="email"
             name="email"
@@ -80,6 +81,11 @@ const SignUpForm: React.FC = () => {
             onChange={signUp.onChangeHandler}
             size="lg"
           />
+          {signUp.hasError("email") ? (
+            <Form.Text className="text-danger">
+              {signUp.getError("email").msg}
+            </Form.Text>
+          ) : null}
         </Form.Group>
 
         {/* Password field */}
@@ -133,7 +139,11 @@ const SignUpForm: React.FC = () => {
           <strong>Sign Up</strong>
         </Button>
       </Form>
-      <Preloader show={false} color="primary" text="Signing you up.." />
+      <Preloader
+        show={signUp.pending}
+        color="primary"
+        text="Signing you up.."
+      />
     </React.Fragment>
   );
 };

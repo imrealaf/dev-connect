@@ -23,5 +23,14 @@ export default {
         passwordMatch: `Confirmed password must match the above`
       };
     }
+  },
+  http: {
+    requestDelay: 2000,
+    responseDelay: 0,
+    postConfig: {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
   }
 };
