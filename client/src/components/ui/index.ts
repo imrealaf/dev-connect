@@ -8,5 +8,6 @@
 import Preloader from "./Preloader";
 import Preload from "./Preload";
 import Hero from "./Hero";
+import SidePanel from "./SidePanel";
 
-export { Preloader, Preload, Hero };
+export { Preloader, Preload, Hero, SidePanel };

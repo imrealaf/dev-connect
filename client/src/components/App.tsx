@@ -66,6 +66,7 @@ const App: React.FC<IAppProps> = ({ isAuthenticated, location }) => {
       {location.pathname === routes.LOGIN ||
       location.pathname === routes.SIGN_UP ? null : (
         <Navigation
+          location={location}
           isAuthenticated={isAuthenticated}
           bg="primary"
           variant="dark"

@@ -2,11 +2,11 @@
  *  Dashboard
  *
  *  @type Component
- *  @desc the landing page
+ *  @desc the dashboard page
  */
 
 import React, { useEffect } from "react";
-import { connect, MapStateToProps } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
@@ -18,17 +18,12 @@ import { doGetCurrentProfile } from "../redux/actions/profile.actions";
 interface IDashboardProps {
   auth: any;
   profile: any;
-  doGetCurrentProfile: any;
 }
 
-const Dashboard: React.FC<IDashboardProps> = ({
-  doGetCurrentProfile,
-  auth,
-  profile
-}) => {
+const Dashboard: React.FC<IDashboardProps> = ({ auth, profile }) => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    console.log("getprofile");
-    doGetCurrentProfile();
+    dispatch(doGetCurrentProfile());
   }, []);
 
   /*
@@ -58,4 +53,4 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps, { doGetCurrentProfile })(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

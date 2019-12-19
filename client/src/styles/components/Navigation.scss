@@ -1,7 +1,11 @@
 .navigation {
   .navbar-brand {
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
     font-weight: 300;
+  }
+  .navbar-toggler {
+    border: none;
+    position: absolute;
+    right: 10px;
   }
   .nav-link {
     .fa-xs {

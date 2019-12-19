@@ -5,9 +5,9 @@
  *  @desc this file just exports all custom hooks into one object so they can be imported easier
  */
 
-import useModal from "./useModal";
+import useToggle from "./useToggle";
 import useLogin from "./useLogin";
 import useSignUp from "./useSignUp";
 import useLogout from "./useLogout";
 
-export { useModal, useLogin, useSignUp, useLogout };
+export { useToggle, useLogin, useSignUp, useLogout };
