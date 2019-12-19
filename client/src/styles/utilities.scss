@@ -9,7 +9,11 @@
 
 // Text
 .lh-1 {
-  line-height: 1;
+  line-height: 1 !important;
+}
+
+.text-lg {
+  font-size: 1.2rem !important;
 }
 
 // Font
@@ -19,5 +23,5 @@
 
 // Images
 .img-circle {
-  border-radius: 50%;
+  border-radius: 50% !important;
 }

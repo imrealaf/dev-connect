@@ -35,5 +35,10 @@ export default {
         "Content-Type": "application/json"
       }
     }
+  },
+  sanitizeHtml: {
+    allowedAttributes: {
+      "*": ["href", "data-*", "alt", "class"]
+    }
   }
 };

@@ -5,6 +5,9 @@
  *  @desc several utility functions that can be used throughout the site anywhere
  */
 
+import config from "../constants/config";
+import sanitizeHtml from "sanitize-html";
+
 export const addRouteAttrToDOM = (
   location: any,
   element: HTMLElement = document.body,
@@ -49,4 +52,8 @@ export const addBodyClass = (...classes: string[]) => {
 
 export const removeBodyClass = (...classes: string[]) => {
   document.body.classList.remove(...classes);
+};
+
+export const sanitize = (html: string) => {
+  return { __html: sanitizeHtml(html, config.sanitizeHtml) };
 };

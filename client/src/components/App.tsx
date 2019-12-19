@@ -8,15 +8,21 @@
 
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
-import { Switch, withRouter, RouteComponentProps } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  withRouter,
+  RouteComponentProps
+} from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Routes/pages
+import pages from "../data";
 import * as routes from "../constants/routes";
-import { Landing, Login, SignUp, Dashboard } from "../pages";
+import { Generic, Landing, Login, SignUp, Dashboard } from "../pages";
 
 // Components
 import { RedirectRoute } from "./hoc";
@@ -31,6 +37,16 @@ interface IAppProps extends RouteComponentProps {
   isAuthenticated: boolean;
   user: any;
 }
+
+const genericPages = () => {
+  return pages.map((page: any) => {
+    return (
+      <Route exact path={page.path}>
+        <Generic {...page} />
+      </Route>
+    );
+  });
+};
 
 const App: React.FC<IAppProps> = ({ isAuthenticated, user, location }) => {
   /*
@@ -111,6 +127,8 @@ const App: React.FC<IAppProps> = ({ isAuthenticated, user, location }) => {
           >
             <Dashboard />
           </RedirectRoute>
+
+          {genericPages()}
         </Switch>
       </main>
     </React.Fragment>

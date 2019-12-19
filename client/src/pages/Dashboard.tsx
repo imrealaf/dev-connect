@@ -31,16 +31,18 @@ const Dashboard: React.FC<IDashboardProps> = ({ auth, profile }) => {
    */
   return (
     <Page title="Dashboard" descrip="This is the home page">
-      {/* Hero */}
-      <Hero>
-        <div className="text-center text-white">
-          <h1 className="display-4">Dashboard</h1>
-        </div>
-      </Hero>
+      <div className="pt-5">
+        {/* Hero */}
+        <Hero bg="gray-800">
+          <div className="text-center text-white">
+            <h1 className="display-4">Dashboard</h1>
+          </div>
+        </Hero>
 
-      {/* Page content */}
-      <div id="content">
-        <Container>Something here</Container>
+        {/* Page content */}
+        <div id="content" className="py-4">
+          <Container>Something here</Container>
+        </div>
       </div>
     </Page>
   );

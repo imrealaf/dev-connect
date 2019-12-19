@@ -86,7 +86,7 @@ const Navigation: React.FC<INavigationProps> & {
       <React.Fragment>
         <Link
           to={isAuthenticated ? routes.DASHBOARD : routes.LANDING}
-          className="sidepanel_logo mb-3 text-dark font-light"
+          className="sidepanel_logo mb-3 text-primary font-light text-lg"
         >
           <FontAwesomeIcon className="mr-1" icon={["fas", "code"]} size="1x" />{" "}
           <span>{config.appName}</span>

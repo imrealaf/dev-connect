@@ -26,11 +26,10 @@ const Landing: React.FC = () => {
       <Hero image={heroImage} vh={100} overlay={true} overlayOpacity={0.8}>
         <div className="text-center text-white">
           <h1 className="display-4">
-            Welcome to <span className="text-primary">DevConnect</span>
+            Welcome to <strong className="text-primary">DevConnect</strong>
           </h1>
           <h5 className="font-light mt-3">
-            Create a developer profile, share posts & get help from other
-            developers
+            Create a profile, share posts & connect with other developers
           </h5>
           <div className="mt-5">
             <Link
