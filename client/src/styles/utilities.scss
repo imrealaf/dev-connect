@@ -1,5 +1,4 @@
 // Backgrounds
-
 @each $color, $value in $grays {
   @include bg-variant(".bg-gray-#{$color}", $value, true);
 }
@@ -8,8 +7,17 @@
   background: $black !important;
 }
 
-// Font
+// Text
+.lh-1 {
+  line-height: 1;
+}
 
+// Font
 .font-light {
   font-weight: 300 !important;
+}
+
+// Images
+.img-circle {
+  border-radius: 50%;
 }

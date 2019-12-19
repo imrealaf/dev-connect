@@ -29,9 +29,10 @@ import { getCurrentUser } from "../redux/actions/auth.actions";
 // App props
 interface IAppProps extends RouteComponentProps {
   isAuthenticated: boolean;
+  user: any;
 }
 
-const App: React.FC<IAppProps> = ({ isAuthenticated, location }) => {
+const App: React.FC<IAppProps> = ({ isAuthenticated, user, location }) => {
   /*
    *  Add font awesome icons to library
    */
@@ -68,6 +69,7 @@ const App: React.FC<IAppProps> = ({ isAuthenticated, location }) => {
         <Navigation
           location={location}
           isAuthenticated={isAuthenticated}
+          user={user}
           bg="primary"
           variant="dark"
           fixed="top"
@@ -117,7 +119,8 @@ const App: React.FC<IAppProps> = ({ isAuthenticated, location }) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
   };
 };
 

@@ -32,7 +32,9 @@ $side-panel-transitions-start: (
   height: 100%;
   z-index: 1050;
   transition: all 0.3s ease;
+  opacity: 0;
   background: black;
+  border-left: 1px solid $gray-200;
 
   .sidepanel_body {
     width: 100%;
@@ -42,6 +44,18 @@ $side-panel-transitions-start: (
     opacity: 0;
     flex-direction: column;
     transition: all 0.3s ease 0.15s;
+
+    .active {
+      font-weight: bold;
+    }
+  }
+
+  .sidepanel_logo {
+    display: inline-block;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   /* ----------------
@@ -61,11 +75,16 @@ $side-panel-transitions-start: (
     }
   }
 
+  &.sidepanel-shadow {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  }
+
   /* ----------------
      In State
  ----------------- */
 
   &.in {
+    opacity: 1;
     transform: translateX(0);
 
     .sidepanel_body {
@@ -83,8 +102,8 @@ $side-panel-transitions-start: (
   position: fixed;
   left: 0;
   top: 0;
-  width: 100vh;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 1040;
 }
 

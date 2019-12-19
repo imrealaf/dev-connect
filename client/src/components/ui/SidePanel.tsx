@@ -13,6 +13,8 @@ const componentName = "sidepanel";
 interface Props {
   id?: string;
   position: string;
+  bg: string;
+  shadow: boolean;
   show: boolean;
   handleClose: any;
 }
@@ -20,11 +22,14 @@ interface Props {
 const SidePanel: React.FC<Props> & { defaultProps: Partial<Props> } = ({
   children,
   position,
+  bg,
+  shadow,
   show,
   handleClose
 }) => {
   const classNames = () => {
-    const classes = [componentName, `${componentName}-${position}`];
+    const classes = [componentName, `${componentName}-${position}`, `bg-${bg}`];
+    if (shadow) classes.push(`${componentName}-shadow`);
     if (show) {
       document.body.classList.add(`${componentName}-active`);
       classes.push("in");
@@ -51,6 +56,8 @@ const SidePanel: React.FC<Props> & { defaultProps: Partial<Props> } = ({
 
 SidePanel.defaultProps = {
   position: "right",
+  bg: "light",
+  shadow: true,
   show: false,
   handleClose: null
 };

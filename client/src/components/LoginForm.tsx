@@ -8,9 +8,10 @@
 import React, { useRef } from "react";
 import { Form, Button } from "react-bootstrap";
 
-import config from "../constants/config";
+import * as routes from "../constants/routes";
 import { Preloader } from "../components/ui";
 import { useLogin } from "../hooks";
+import { Link } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
   /*
@@ -72,6 +73,13 @@ const LoginForm: React.FC = () => {
         >
           <strong>Log In</strong>
         </Button>
+        {!login.data.email ? (
+          <div className="mt-2">
+            <small>
+              Don't have an account? <Link to={routes.SIGN_UP}>Sign Up</Link>
+            </small>
+          </div>
+        ) : null}
       </Form>
       <Preloader show={login.pending} color="primary" text="Signing you in.." />
     </React.Fragment>

@@ -15,5 +15,13 @@ export const privateNav = [
   {
     title: "Dashboard",
     path: "/dashboard"
+  },
+  {
+    title: "Posts",
+    path: "/posts"
+  },
+  {
+    title: "My Profile",
+    path: "/profile"
   }
 ];
