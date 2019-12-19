@@ -11,6 +11,8 @@
 
 [data-route="login"],
 [data-route="sign-up"] {
+  position: fixed;
+  overflow: hidden;
   display: flex;
   width: 100%;
   flex-flow: column;
