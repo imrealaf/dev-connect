@@ -2,9 +2,7 @@ import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import axios from "axios";
 
-import config from "../../constants/config";
 import { AuthPayload, AuthUserPayload } from "../../types/Auth";
-import { RequestError } from "../../types/Request";
 import * as types from "../actionTypes";
 import * as auth from "../../utils/auth";
 
@@ -72,6 +70,13 @@ export const loginFail = (): AnyAction => {
   return {
     type: types.SIGNUP_FAIL
   };
+};
+
+export const doLogin = (token: any): any => async (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) => {
+  dispatch(loginSuccess(token));
+  dispatch(getCurrentUser());
 };
 
 /*

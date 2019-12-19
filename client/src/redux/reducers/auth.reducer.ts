@@ -31,7 +31,13 @@ export default (state: AuthState = initialState, action: AnyAction) => {
     case types.LOGIN_FAIL:
     case types.LOGOUT:
       localStorage.removeItem(config.auth.tokenStorageName);
-      return { ...state, token: null, isAuthenticated: false, loading: false };
+      return {
+        ...state,
+        user: null,
+        token: null,
+        isAuthenticated: false,
+        loading: false
+      };
 
     default:
       return state;

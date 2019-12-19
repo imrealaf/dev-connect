@@ -14,7 +14,7 @@ import axios from "axios";
 import config from "../constants/config";
 import { RequestError } from "../types/Request";
 import { LoginFormState } from "../types/Auth";
-import { loginSuccess, loginFail } from "../redux/actions/auth.actions";
+import { doLogin, loginFail } from "../redux/actions/auth.actions";
 
 const initialData: LoginFormState = {
   email: "",
@@ -84,11 +84,8 @@ export default () => {
       // Set not pending
       setPending(false);
 
-      // Dispatch success actions
-      dispatch(loginSuccess(response.data));
-
-      // Redirect to dashboard
-      window.location.reload();
+      // Dispatch success action
+      dispatch(doLogin(response.data));
 
       // Login fail ..
     } catch (error) {

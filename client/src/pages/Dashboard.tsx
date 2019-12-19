@@ -27,6 +27,7 @@ const Dashboard: React.FC<IDashboardProps> = ({
   profile
 }) => {
   useEffect(() => {
+    console.log("getprofile");
     doGetCurrentProfile();
   }, []);
 
