@@ -6,7 +6,7 @@ import { AuthState } from "../../types/Auth";
 
 const initialState: AuthState = {
   token: localStorage.getItem(config.auth.tokenStorageName),
-  isAuthenticated: null,
+  isAuthenticated: false,
   loading: true,
   user: null
 };

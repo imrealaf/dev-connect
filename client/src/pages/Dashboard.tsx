@@ -5,14 +5,31 @@
  *  @desc the landing page
  */
 
-import React from "react";
+import React, { useEffect } from "react";
+import { connect, MapStateToProps } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
 import { Page } from "../components/hoc";
 import { Hero } from "../components/ui";
 
-const Dashboard: React.FC = () => {
+import { doGetCurrentProfile } from "../redux/actions/profile.actions";
+
+interface IDashboardProps {
+  auth: any;
+  profile: any;
+  doGetCurrentProfile: any;
+}
+
+const Dashboard: React.FC<IDashboardProps> = ({
+  doGetCurrentProfile,
+  auth,
+  profile
+}) => {
+  useEffect(() => {
+    doGetCurrentProfile();
+  }, []);
+
   /*
    *  Render
    */
@@ -33,4 +50,11 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state: any) => {
+  return {
+    auth: state.auth,
+    profile: state.profile
+  };
+};
+
+export default connect(mapStateToProps, { doGetCurrentProfile })(Dashboard);

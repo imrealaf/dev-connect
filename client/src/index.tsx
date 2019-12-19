@@ -14,10 +14,10 @@ import "./styles/index.scss";
 import { App } from "./components";
 import registerServiceWorker from "./registerServiceWorker";
 import store from "./redux/store";
-import { checkAuthUser } from "./utils/auth";
+import { checkAuthToken } from "./utils/auth";
 
 // Check auth user before mount
-checkAuthUser();
+checkAuthToken();
 
 // Mount
 ReactDOM.render(

@@ -6,20 +6,17 @@
  */
 
 import React, { useRef } from "react";
-import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 
 import config from "../constants/config";
 import { Preloader } from "../components/ui";
 import { useLogin } from "../hooks";
-import { loginSuccess, loginFail } from "../redux/actions/auth.actions";
-import { ILoginFormProps } from "../types/Auth";
 
-const LoginForm: React.FC<ILoginFormProps> = ({ loginSuccess, loginFail }) => {
+const LoginForm: React.FC = () => {
   /*
    *  Login api
    */
-  const login = useLogin(loginSuccess, loginFail);
+  const login = useLogin();
 
   /*
    *  Render
@@ -81,6 +78,4 @@ const LoginForm: React.FC<ILoginFormProps> = ({ loginSuccess, loginFail }) => {
   );
 };
 
-const mapDispatchToProps = { loginSuccess, loginFail };
-
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default LoginForm;

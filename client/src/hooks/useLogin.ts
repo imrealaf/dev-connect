@@ -7,23 +7,24 @@
 
 import { FormEvent } from "react";
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import validator from "validator";
 import axios from "axios";
 
 import config from "../constants/config";
-import * as routes from "../constants/routes";
 import { RequestError } from "../types/Request";
 import { LoginFormState } from "../types/Auth";
+import { loginSuccess, loginFail } from "../redux/actions/auth.actions";
 
 const initialData: LoginFormState = {
   email: "",
   password: ""
 };
 
-export default (success: any, fail: any) => {
-  // Get history
-  const history = useHistory();
+export default () => {
+  // Get dispatch
+  const dispatch = useDispatch();
+
   /* 
     Create state
   */
@@ -83,11 +84,11 @@ export default (success: any, fail: any) => {
       // Set not pending
       setPending(false);
 
-      // Dispatch success action
-      success(response.data);
+      // Dispatch success actions
+      dispatch(loginSuccess(response.data));
 
       // Redirect to dashboard
-      history.push(routes.DASHBOARD);
+      window.location.reload();
 
       // Login fail ..
     } catch (error) {
@@ -98,7 +99,7 @@ export default (success: any, fail: any) => {
       // Set and dispatch errors
       setPending(false);
       setErrors(errors);
-      fail();
+      dispatch(loginFail());
     }
   };
 

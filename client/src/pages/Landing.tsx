@@ -23,7 +23,7 @@ const Landing: React.FC = () => {
   return (
     <Page descrip="This is the home page">
       {/* Hero */}
-      <Hero image={heroImage} vh={100} overlay={true} overlayOpacity={0.9}>
+      <Hero image={heroImage} vh={100} overlay={true} overlayOpacity={0.8}>
         <div className="text-center text-white">
           <h1 className="display-4">
             Welcome to <span className="text-primary">DevConnect</span>

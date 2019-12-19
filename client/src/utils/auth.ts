@@ -18,7 +18,7 @@ export const getAuthToken = (): string | null => {
   return localStorage.getItem(config.auth.tokenStorageName);
 };
 
-export const checkAuthUser = () => {
+export const checkAuthToken = () => {
   if (hasAuthToken()) {
     setAuthToken(getAuthToken());
   }

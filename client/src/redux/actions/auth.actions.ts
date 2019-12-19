@@ -8,6 +8,9 @@ import { RequestError } from "../../types/Request";
 import * as types from "../actionTypes";
 import * as auth from "../../utils/auth";
 
+/*
+    --------- CURRENT USER -----------
+*/
 export const authSuccess = (payload: AuthUserPayload): AnyAction => {
   return {
     type: types.AUTH_SUCCESS,
@@ -21,11 +24,11 @@ export const authFail = (): AnyAction => {
   };
 };
 
-export const doAuth = (): any => async (
+export const getCurrentUser = (): any => async (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   // Check token
-  auth.checkAuthUser();
+  auth.checkAuthToken();
 
   // Login success ..
   try {
@@ -38,6 +41,9 @@ export const doAuth = (): any => async (
   }
 };
 
+/*
+    --------- SIGN UP -----------
+*/
 export const signUpSuccess = (payload: AuthPayload): AnyAction => {
   return {
     type: types.SIGNUP_SUCCESS,
@@ -51,6 +57,10 @@ export const signUpFail = (): AnyAction => {
   };
 };
 
+/*
+    --------- LOG IN -----------
+*/
+
 export const loginSuccess = (payload: AuthPayload): AnyAction => {
   return {
     type: types.SIGNUP_SUCCESS,
@@ -63,6 +73,10 @@ export const loginFail = (): AnyAction => {
     type: types.SIGNUP_FAIL
   };
 };
+
+/*
+    --------- LOG OUT -----------
+*/
 
 export const logout = (): AnyAction => {
   return {

@@ -12,3 +12,7 @@ export const LOGIN_FAIL = `${config.namespace}/LOGIN_FAIL`;
 export const AUTH_SUCCESS = `${config.namespace}/AUTH_SUCCESS`;
 export const AUTH_FAIL = `${config.namespace}/AUTH_FAIL`;
 export const LOGOUT = `${config.namespace}/LOGOUT`;
+
+// PROFILE
+export const GET_PROFILE = `${config.namespace}/GET_PROFILE`;
+export const PROFILE_ERROR = `${config.namespace}/PROFILE_ERROR`;

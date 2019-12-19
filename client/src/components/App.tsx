@@ -6,13 +6,9 @@
  *  @prop location - the location object from route props
  */
 
-import React from "react";
-import {
-  Switch,
-  Route,
-  withRouter,
-  RouteComponentProps
-} from "react-router-dom";
+import React, { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
+import { Switch, withRouter, RouteComponentProps } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -28,18 +24,30 @@ import { Preload } from "./ui";
 import { Navigation } from "./";
 
 // Auth
-import { useAuth } from "../hooks";
+import { getCurrentUser } from "../redux/actions/auth.actions";
 
-const App: React.FC<RouteComponentProps> = ({ location }) => {
+// App props
+interface IAppProps extends RouteComponentProps {
+  isAuthenticated: boolean;
+}
+
+const App: React.FC<IAppProps> = ({ isAuthenticated, location }) => {
   /*
    *  Add font awesome icons to library
    */
   library.add(fas, fab);
 
   /*
-   *  Get auth state
+   *  Get dispatch
    */
-  const isAuthenticated = useAuth();
+  const dispatch = useDispatch();
+
+  /*
+   *  On mount, get current user ..
+   */
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, []);
 
   /*
    *  Render
@@ -106,4 +114,10 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
   );
 };
 
-export default withRouter(App);
+const mapStateToProps = (state: any) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(App));
