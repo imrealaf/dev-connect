@@ -23,10 +23,6 @@ $side-panel-transitions-start: (
   "left": -$side-panel-width,
   "right": $side-panel-width
 );
-$side-panel-transitions-end: (
-  "left": 0,
-  "right": 0
-);
 
 .sidepanel {
   display: flex;
