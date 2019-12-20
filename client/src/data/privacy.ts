@@ -1,3 +1,10 @@
+/**
+ *  Privacy Policy
+ *
+ *  @type Object
+ *  @desc data for privacy policy page
+ */
+
 export default {
   title: "Privacy Policy",
   descrip: "Lorem ipsum",

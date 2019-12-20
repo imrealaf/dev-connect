@@ -1,3 +1,10 @@
+/**
+ *  Auth Actions
+ *
+ *  @type Actions & Action Creators
+ *  @desc actions for auth
+ */
+
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import axios from "axios";

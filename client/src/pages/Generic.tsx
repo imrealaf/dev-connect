@@ -2,15 +2,13 @@
  *  Generic
  *
  *  @type Component
- *  @desc the dashboard page
+ *  @desc generic page component
  */
 
 import React from "react";
 import { Container } from "react-bootstrap";
 
 import { Page } from "../components/hoc";
-import { Hero } from "../components/ui";
-
 import { sanitize } from "../utils";
 
 interface IGenericProps {

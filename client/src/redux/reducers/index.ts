@@ -1,3 +1,9 @@
+/**
+ *  Root Reducer
+ *
+ *  @type Reducer
+ */
+
 import { combineReducers } from "redux";
 
 import alerts from "./alerts.reducer";

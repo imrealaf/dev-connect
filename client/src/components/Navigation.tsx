@@ -1,5 +1,5 @@
 /**
- *  Navbar
+ *  Navigation
  *
  *  @type UI Component
  *  @desc navigation component displaying items based on auth state

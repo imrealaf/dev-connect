@@ -1,3 +1,9 @@
+/**
+ *  Profile Reducer
+ *
+ *  @type Reducer
+ */
+
 import { AnyAction } from "redux";
 
 import config from "../../constants/config";

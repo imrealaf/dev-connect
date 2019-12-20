@@ -1,3 +1,10 @@
+/**
+ *  Terms of Use
+ *
+ *  @type Object
+ *  @desc data for terms of use page
+ */
+
 export default {
   title: "Terms of Use",
   descrip: "Lorem ipsum",

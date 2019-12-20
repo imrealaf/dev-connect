@@ -1,3 +1,10 @@
+/**
+ *  Profile Actions
+ *
+ *  @type Actions & Action Creators
+ *  @desc actions for profile
+ */
+
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import axios from "axios";

@@ -1,3 +1,9 @@
+/**
+ *  Action Types
+ *
+ *  @type Constants
+ */
+
 import config from "../constants/config";
 
 // ALERTS
