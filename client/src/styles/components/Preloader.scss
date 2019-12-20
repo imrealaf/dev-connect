@@ -8,6 +8,12 @@
   width: 80px;
   height: 80px;
 
+  + p {
+    position: relative;
+    margin-top: -$grid-gutter-width/2;
+    margin-bottom: $grid-gutter-width;
+  }
+
   div {
     position: absolute;
     top: 33px;

@@ -81,7 +81,7 @@ $side-panel-transitions-start: (
   }
 
   &.sidepanel-shadow {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 $grid-gutter-width/2 rgba(0, 0, 0, 0.1);
   }
 
   /* ----------------

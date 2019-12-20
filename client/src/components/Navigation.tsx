@@ -28,6 +28,7 @@ import { useToggle, useLogout } from "../hooks";
 import { SidePanel } from "./ui";
 
 interface INavigationProps extends NavbarProps {
+  shadow: boolean;
   isAuthenticated: boolean;
   user: any;
   location: any;
@@ -35,7 +36,7 @@ interface INavigationProps extends NavbarProps {
 
 const Navigation: React.FC<INavigationProps> & {
   defaultProps: Partial<INavigationProps>;
-} = ({ isAuthenticated, user, location, ...rest }) => {
+} = ({ isAuthenticated, user, shadow, location, ...rest }) => {
   /*
    *  Logout function
    */
@@ -46,6 +47,9 @@ const Navigation: React.FC<INavigationProps> & {
    */
   const panel = useToggle();
 
+  /*
+   *  On location change
+   */
   useEffect(() => {
     panel.handleClose();
   }, [location]);
@@ -135,12 +139,21 @@ const Navigation: React.FC<INavigationProps> & {
   };
 
   /*
+   *  Classes function
+   */
+  const className = (): string => {
+    const classes = ["navigation"];
+    if (shadow) classes.push("navigation-shadow");
+    return classes.join(" ");
+  };
+
+  /*
    *  Render
    */
   return (
     <React.Fragment>
       {/* Navbar */}
-      <Navbar className="navigation" {...rest}>
+      <Navbar className={className()} {...rest}>
         <Container fluid>
           {/* Logo */}
           <Link
@@ -193,6 +206,7 @@ const Navigation: React.FC<INavigationProps> & {
 
 Navigation.defaultProps = {
   bg: "dark",
+  shadow: true,
   variant: "dark",
   expand: false
 };

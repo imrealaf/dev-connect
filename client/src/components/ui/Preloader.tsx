@@ -29,7 +29,7 @@ const Preloader: React.FC<Props> & { defaultProps: Partial<Props> } = ({
         <div className={`bg-${color}`} />
         <div className={`bg-${color}`} />
       </div>
-      {text ? <p>{text}</p> : null}
+      {text ? <p className="text-secondary">{text}</p> : null}
     </React.Fragment>
   ) : null;
 };

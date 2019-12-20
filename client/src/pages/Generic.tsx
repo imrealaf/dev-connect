@@ -26,7 +26,7 @@ const Generic: React.FC<IGenericProps> = ({ title, descrip, content }) => {
       <div id="content" className="mt-5">
         <Container className="py-4">
           <h1>{title}</h1>
-          <hr className="my-4" />
+          <span className="divider bg-gray-300 my-3"></span>
           <div dangerouslySetInnerHTML={sanitize(content)}></div>
         </Container>
       </div>

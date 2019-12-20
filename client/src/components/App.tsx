@@ -75,6 +75,7 @@ const App: React.FC<IAppProps> = ({ isAuthenticated, user, location }) => {
         <Navigation
           location={location}
           isAuthenticated={isAuthenticated}
+          shadow={location.pathname === routes.LANDING ? false : true}
           user={user}
           bg="primary"
           variant="dark"
