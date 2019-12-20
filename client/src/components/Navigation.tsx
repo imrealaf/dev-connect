@@ -19,6 +19,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import config from "../constants/config";
+import pages from "../data";
 import * as routes from "../constants/routes";
 import { NavigationLink } from "../types/Navigation";
 import { publicNav, privateNav } from "../constants/navigation";
@@ -58,6 +59,26 @@ const Navigation: React.FC<INavigationProps> & {
       return (
         <React.Fragment key={i}>
           <NavLink className="nav-link px-0" to={item.path}>
+            {item.title}
+          </NavLink>
+        </React.Fragment>
+      );
+    });
+  };
+
+  /*
+   *  Get generic items
+   */
+  const getGenericItems = () => {
+    return pages.map((item: any, i) => {
+      return (
+        <React.Fragment key={i}>
+          <NavLink
+            className={`nav-link text-sm text-secondary p-0${
+              i > 0 ? " ml-3" : ""
+            }`}
+            to={item.path}
+          >
             {item.title}
           </NavLink>
         </React.Fragment>
@@ -161,6 +182,10 @@ const Navigation: React.FC<INavigationProps> & {
             Log Out
           </Button>
         ) : null}
+
+        <div className="sidepanel_bottom">
+          <Nav>{getGenericItems()}</Nav>
+        </div>
       </SidePanel>
     </React.Fragment>
   );

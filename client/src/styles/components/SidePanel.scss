@@ -58,6 +58,11 @@ $side-panel-transitions-start: (
     }
   }
 
+  .sidepanel_bottom {
+    position: absolute;
+    bottom: $side-panel-padding;
+  }
+
   /* ----------------
      Variations
     ----------------- */

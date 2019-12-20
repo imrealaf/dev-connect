@@ -76,7 +76,7 @@ export default () => {
     // Login success ..
     try {
       const response = await axios.post(
-        "/api/auth",
+        `${config.apiBase}/auth`,
         JSON.stringify(data),
         config.http.postConfig
       );

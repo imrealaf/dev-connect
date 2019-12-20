@@ -110,7 +110,7 @@ export default (success: any, fail: any) => {
   const submit = async () => {
     try {
       const response = await axios.post(
-        "/api/users",
+        `${config.apiBase}/users`,
         JSON.stringify(data),
         config.http.postConfig
       );

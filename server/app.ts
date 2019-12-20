@@ -6,6 +6,7 @@ import compression from "compression";
 import path from "path";
 
 import clientConfig from "./constants/client";
+import routingConfig from "./constants/routing";
 import connectDB from "./db";
 import routes from "./routes";
 
@@ -25,7 +26,7 @@ app.use(express.static(path.resolve(__dirname, clientConfig.staticPath)));
 
 // Register API routes
 for (const route in routes) {
-  app.use(`/api/${route}`, routes[route]);
+  app.use(`${routingConfig.getApiRoot()}/${route}`, routes[route]);
 }
 
 // Handle React routing, return all requests to React app in production

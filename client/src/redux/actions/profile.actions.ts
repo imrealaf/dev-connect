@@ -2,6 +2,7 @@ import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import axios from "axios";
 
+import config from "../../constants/config";
 import * as types from "../actionTypes";
 
 export const getCurrentProfile = (payload: any): AnyAction => {
@@ -23,7 +24,7 @@ export const doGetCurrentProfile = (): any => async (
 ) => {
   // Login success ..
   try {
-    const response = await axios.get("/api/profiles/me");
+    const response = await axios.get(`${config.apiBase}/profiles/me`);
     dispatch(getCurrentProfile(response.data));
 
     // Login fail ..

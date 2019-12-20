@@ -38,16 +38,6 @@ interface IAppProps extends RouteComponentProps {
   user: any;
 }
 
-const genericPages = () => {
-  return pages.map((page: any) => {
-    return (
-      <Route exact path={page.path}>
-        <Generic {...page} />
-      </Route>
-    );
-  });
-};
-
 const App: React.FC<IAppProps> = ({ isAuthenticated, user, location }) => {
   /*
    *  Add font awesome icons to library
@@ -128,7 +118,14 @@ const App: React.FC<IAppProps> = ({ isAuthenticated, user, location }) => {
             <Dashboard />
           </RedirectRoute>
 
-          {genericPages()}
+          {/* Public generic pages */}
+          {pages.map((page: any, i) => {
+            return (
+              <Route key={i} exact path={page.path}>
+                <Generic {...page} />
+              </Route>
+            );
+          })}
         </Switch>
       </main>
     </React.Fragment>

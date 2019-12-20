@@ -16,6 +16,7 @@ export default {
   preload: {
     delayTime: 1500
   },
+  apiBase: "/api",
   auth: {
     minPasswordLength: 6,
     validationErrors() {

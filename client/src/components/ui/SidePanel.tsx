@@ -6,6 +6,7 @@
  */
 
 import React from "react";
+import { useSwipeable } from "react-swipeable";
 
 const componentName = "sidepanel";
 
@@ -27,6 +28,17 @@ const SidePanel: React.FC<Props> & { defaultProps: Partial<Props> } = ({
   show,
   handleClose
 }) => {
+  /*
+   *  Swipe handling
+   */
+  const swipeEvent = position === "left" ? "onSwipedLeft" : "onSwipedRight";
+  const swipeHandler = useSwipeable({
+    [swipeEvent]: () => handleClose()
+  });
+
+  /*
+   *  classNames generation function
+   */
   const classNames = () => {
     const classes = [componentName, `${componentName}-${position}`, `bg-${bg}`];
     if (shadow) classes.push(`${componentName}-shadow`);
@@ -44,7 +56,7 @@ const SidePanel: React.FC<Props> & { defaultProps: Partial<Props> } = ({
    */
   return (
     <React.Fragment>
-      <div className={classNames()}>
+      <div className={classNames()} {...swipeHandler}>
         <div className={`${componentName}_body`}>{children}</div>
       </div>
       {show ? (

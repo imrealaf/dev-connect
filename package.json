@@ -30,6 +30,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.0",
     "nodemailer": "^6.2.1",
+    "react-swipeable": "^5.5.0",
     "request": "^2.88.0",
     "sanitize-html": "^1.20.1",
     "ts-mongoose": "0.0.21"
@@ -48,6 +49,7 @@
     "@types/mongoose": "^5.5.34",
     "@types/node": "^12.0.10",
     "@types/nodemailer": "^6.2.0",
+    "@types/react-swipeable": "^5.2.0",
     "@types/request": "^2.48.4",
     "@types/sanitize-html": "^1.20.2",
     "@types/shelljs": "^0.8.5",
