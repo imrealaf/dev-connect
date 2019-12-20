@@ -1,12 +1,13 @@
 /**
- *  Dashboard
+ *  Profile
  *
  *  @type Component
- *  @desc the dashboard page
+ *  @desc the profile page
  */
 
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
 import { Page } from "../components/hoc";
@@ -14,12 +15,12 @@ import { Hero } from "../components/ui";
 
 import { doGetCurrentProfile } from "../redux/actions/profile.actions";
 
-interface IDashboardProps {
+interface IProfileProps {
   auth: any;
   profile: any;
 }
 
-const Dashboard: React.FC<IDashboardProps> = ({ auth, profile }) => {
+const Profile: React.FC<IProfileProps> = ({ auth, profile }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(doGetCurrentProfile());
@@ -29,12 +30,12 @@ const Dashboard: React.FC<IDashboardProps> = ({ auth, profile }) => {
    *  Render
    */
   return (
-    <Page title="Dashboard" descrip="This is the home page">
+    <Page title="Profile" descrip="This is the profile page">
       <div className="pt-5">
         {/* Hero */}
         <Hero bg="gray-800">
           <div className="text-center text-white">
-            <h1 className="display-4">Dashboard</h1>
+            <h1 className="display-4">Profile</h1>
           </div>
         </Hero>
 
@@ -54,4 +55,4 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(Profile);

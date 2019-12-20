@@ -5,23 +5,26 @@
  *  @desc contains configurations for the app that can be tweaked and altered
  */
 
+import * as routes from "./routes";
+
 export const publicNav = [
   {
-    title: "Developers",
-    path: "/developers"
+    title: "Browse Developers",
+    path: routes.DEVELOPERS
   }
 ];
+
 export const privateNav = [
   {
     title: "Dashboard",
-    path: "/dashboard"
+    path: routes.DASHBOARD
   },
   {
     title: "Posts",
-    path: "/posts"
+    path: routes.POSTS
   },
   {
     title: "My Profile",
-    path: "/profile"
+    path: routes.PROFILE
   }
 ];

@@ -7,9 +7,10 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Jumbotron, Button, Modal } from "react-bootstrap";
 
+import data from "../data/landing";
 import * as routes from "../constants/routes";
+import { sanitize } from "../utils";
 
 import { Page } from "../components/hoc";
 import { Hero } from "../components/ui";
@@ -25,12 +26,14 @@ const Landing: React.FC = () => {
       {/* Hero */}
       <Hero image={heroImage} vh={100} overlay={true} overlayOpacity={0.8}>
         <div className="text-center text-white">
-          <h1 className="display-4">
-            Welcome to <strong className="text-primary">DevConnect</strong>
-          </h1>
-          <h5 className="font-light mt-3">
-            Create a profile, share posts & connect with other developers
-          </h5>
+          <h1
+            className="display-4"
+            dangerouslySetInnerHTML={sanitize(data.heading)}
+          />
+          <h5
+            className="font-light mt-3"
+            dangerouslySetInnerHTML={sanitize(data.subheading)}
+          />
           <div className="mt-5">
             <Link
               to={routes.SIGN_UP}
@@ -47,11 +50,6 @@ const Landing: React.FC = () => {
           </div>
         </div>
       </Hero>
-
-      {/* Page content */}
-      {/* <div id="content">
-        <Container>Something here</Container>
-      </div> */}
     </Page>
   );
 };

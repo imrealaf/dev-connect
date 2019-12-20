@@ -12,6 +12,7 @@ import validator from "validator";
 import axios from "axios";
 
 import config from "../constants/config";
+import * as routes from "../constants/routes";
 import { RequestError } from "../types/Request";
 import { LoginFormState } from "../types/Auth";
 import { doLogin, loginFail } from "../redux/actions/auth.actions";
@@ -76,7 +77,7 @@ export default () => {
     // Login success ..
     try {
       const response = await axios.post(
-        `${config.apiBase}/auth`,
+        routes.API_AUTH,
         JSON.stringify(data),
         config.http.postConfig
       );

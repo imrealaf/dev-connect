@@ -11,6 +11,7 @@ import validator from "validator";
 import axios from "axios";
 
 import config from "../constants/config";
+import * as routes from "../constants/routes";
 import { RequestError } from "../types/Request";
 import { SignUpFormState } from "../types/Auth";
 
@@ -110,7 +111,7 @@ export default (success: any, fail: any) => {
   const submit = async () => {
     try {
       const response = await axios.post(
-        `${config.apiBase}/users`,
+        routes.API_USERS,
         JSON.stringify(data),
         config.http.postConfig
       );

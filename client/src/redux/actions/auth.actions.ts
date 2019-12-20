@@ -9,7 +9,7 @@ import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import axios from "axios";
 
-import config from "../../constants/config";
+import * as routes from "../../constants/routes";
 import { AuthPayload, AuthUserPayload } from "../../types/Auth";
 import * as types from "../actionTypes";
 import * as auth from "../../utils/auth";
@@ -38,7 +38,7 @@ export const getCurrentUser = (): any => async (
 
   // Login success ..
   try {
-    const response = await axios.get(`${config.apiBase}/auth`);
+    const response = await axios.get(routes.API_AUTH);
     dispatch(authSuccess(response.data));
 
     // Login fail ..
