@@ -2,7 +2,7 @@
 
 Social media site for developers built with MERN stack
 
-STATUS: Currently working on back-end. Front-end is still pending
+STATUS: Back-end complete. Currently working on Front-end
 
 ## Back-End Includes
 
