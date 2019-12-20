@@ -6,7 +6,6 @@
 
 import { AnyAction } from "redux";
 
-import config from "../../constants/config";
 import * as types from "../actionTypes";
 import { ProfileState } from "../../types/Profile";
 

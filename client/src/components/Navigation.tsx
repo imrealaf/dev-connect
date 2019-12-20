@@ -98,7 +98,7 @@ const Navigation: React.FC<INavigationProps> & {
             <img
               className="img-fluid img-circle"
               src={user.avatar}
-              alt="profile photo"
+              alt={`${user.firstName} ${user.lastName}'s profile pic`}
             />
           </Col>
           <Col xs={9} className="pl-3">

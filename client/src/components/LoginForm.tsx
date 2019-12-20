@@ -5,7 +5,7 @@
  *  @desc the login form
  */
 
-import React, { useRef } from "react";
+import React from "react";
 import { Form, Button } from "react-bootstrap";
 
 import * as routes from "../constants/routes";

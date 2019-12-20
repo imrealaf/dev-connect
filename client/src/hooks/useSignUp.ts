@@ -6,7 +6,6 @@
  */
 import { FormEvent } from "react";
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import validator from "validator";
 import axios from "axios";
 
