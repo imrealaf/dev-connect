@@ -1,4 +1,4 @@
-# Dev Connect
+# DevConnect
 
 Social media site for developers built with MERN stack
 
