@@ -9,5 +9,6 @@ import useToggle from "./useToggle";
 import useLogin from "./useLogin";
 import useSignUp from "./useSignUp";
 import useLogout from "./useLogout";
+import useProfile from "./useProfile";
 
-export { useToggle, useLogin, useSignUp, useLogout };
+export { useToggle, useLogin, useSignUp, useLogout, useProfile };

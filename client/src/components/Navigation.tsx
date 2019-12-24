@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import {
   Container,
@@ -211,4 +212,11 @@ Navigation.defaultProps = {
   expand: false
 };
 
-export default Navigation;
+const mapStateToProps = (state: any) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
+  };
+};
+
+export default connect(mapStateToProps)(Navigation);

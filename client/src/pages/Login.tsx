@@ -7,7 +7,8 @@
  */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -16,7 +17,15 @@ import * as routes from "../constants/routes";
 import { Page } from "../components/hoc";
 import { LoginForm } from "../components";
 
-const Login: React.FC = () => {
+interface ILoginProps {
+  isAuthenticated: boolean;
+}
+
+const Login: React.FC<ILoginProps> = ({ isAuthenticated }) => {
+  if (isAuthenticated) {
+    return <Redirect to={routes.DASHBOARD} />;
+  }
+
   return (
     <Page title="Log In">
       <Container className="text-center py-4">
@@ -51,4 +60,8 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state: any) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Login);

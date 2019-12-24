@@ -7,7 +7,8 @@
  */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -16,7 +17,15 @@ import * as routes from "../constants/routes";
 import { Page } from "../components/hoc";
 import { SignUpForm } from "../components";
 
-const SignUp: React.FC = () => {
+interface ISignUpProps {
+  isAuthenticated: boolean;
+}
+
+const SignUp: React.FC<ISignUpProps> = ({ isAuthenticated }) => {
+  if (isAuthenticated) {
+    return <Redirect to={routes.DASHBOARD} />;
+  }
+
   return (
     <Page title="Sign Up">
       <Container className="text-center py-2">
@@ -51,4 +60,8 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+const mapStateToProps = (state: any) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(SignUp);

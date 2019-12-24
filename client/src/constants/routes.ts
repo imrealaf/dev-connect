@@ -16,6 +16,7 @@ export const SIGN_UP = "/sign-up";
 export const DASHBOARD = "/dashboard";
 export const DEVELOPERS = "/developers";
 export const PROFILE = "/profile";
+export const CREATE_PROFILE = "/create-profile";
 export const POSTS = "/posts";
 
 // API

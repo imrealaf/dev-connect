@@ -5,3 +5,10 @@ export type ProfileState = {
   loading: boolean;
   error: any;
 };
+
+export type CreateProfileState = {};
+
+export interface ICreateProfileFormProps {
+  createProfileSuccess: any;
+  createProfileFail: any;
+}

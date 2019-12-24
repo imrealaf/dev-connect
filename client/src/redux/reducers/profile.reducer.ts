@@ -27,6 +27,9 @@ export default (state: ProfileState = initialState, action: AnyAction) => {
     case types.PROFILE_ERROR:
       return { ...state, error: payload, loading: false };
 
+    case types.CLEAR_PROFILE:
+      return { ...state, profile: null, repos: [], loading: false };
+
     default:
       return state;
   }

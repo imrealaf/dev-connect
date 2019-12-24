@@ -7,38 +7,27 @@
  */
 
 import React, { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
-import {
-  Route,
-  Switch,
-  withRouter,
-  RouteComponentProps
-} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Routes/pages
-import pages from "../data";
 import * as routes from "../constants/routes";
-import { Generic, Landing, Login, SignUp, Dashboard } from "../pages";
 
 // Components
-import { RedirectRoute } from "./hoc";
 import { Preload } from "./ui";
-import { Navigation } from "./";
+import { Routes, Navigation } from "./";
 
 // Auth
 import { getCurrentUser } from "../redux/actions/auth.actions";
 
 // App props
-interface IAppProps extends RouteComponentProps {
-  isAuthenticated: boolean;
-  user: any;
-}
+interface IAppProps extends RouteComponentProps {}
 
-const App: React.FC<IAppProps> = ({ isAuthenticated, user, location }) => {
+const App: React.FC<IAppProps> = ({ location }) => {
   /*
    *  Add font awesome icons to library
    */
@@ -70,13 +59,12 @@ const App: React.FC<IAppProps> = ({ isAuthenticated, user, location }) => {
         />
       </Preload>
 
+      {/* Navigation */}
       {location.pathname === routes.LOGIN ||
       location.pathname === routes.SIGN_UP ? null : (
         <Navigation
           location={location}
-          isAuthenticated={isAuthenticated}
           shadow={location.pathname === routes.LANDING ? false : true}
-          user={user}
           bg="primary"
           variant="dark"
           fixed="top"
@@ -85,59 +73,10 @@ const App: React.FC<IAppProps> = ({ isAuthenticated, user, location }) => {
 
       {/* Main content */}
       <main id="main" role="main">
-        <Switch>
-          <RedirectRoute
-            exact
-            path={routes.LANDING}
-            condition={!isAuthenticated}
-            to={routes.DASHBOARD}
-          >
-            <Landing />
-          </RedirectRoute>
-          <RedirectRoute
-            exact
-            path={routes.LOGIN}
-            condition={!isAuthenticated}
-            to={routes.DASHBOARD}
-          >
-            <Login />
-          </RedirectRoute>
-          <RedirectRoute
-            exact
-            path={routes.SIGN_UP}
-            condition={!isAuthenticated}
-            to={routes.DASHBOARD}
-          >
-            <SignUp />
-          </RedirectRoute>
-          <RedirectRoute
-            exact
-            path={routes.DASHBOARD}
-            condition={isAuthenticated}
-            to={routes.LANDING}
-          >
-            <Dashboard />
-          </RedirectRoute>
-
-          {/* Public generic pages */}
-          {pages.map((page: any, i) => {
-            return (
-              <Route key={i} exact path={page.path}>
-                <Generic {...page} />
-              </Route>
-            );
-          })}
-        </Switch>
+        <Routes />
       </main>
     </React.Fragment>
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    isAuthenticated: state.auth.isAuthenticated,
-    user: state.auth.user
-  };
-};
-
-export default connect(mapStateToProps)(withRouter(App));
+export default withRouter(App);

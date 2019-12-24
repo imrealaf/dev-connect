@@ -6,8 +6,9 @@
  */
 
 import App from "./App";
+import Routes from "./Routes";
 import Navigation from "./Navigation";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 
-export { App, Navigation, LoginForm, SignUpForm };
+export { App, Routes, Navigation, LoginForm, SignUpForm };

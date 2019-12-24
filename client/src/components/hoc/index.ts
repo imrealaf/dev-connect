@@ -6,6 +6,7 @@
  */
 
 import RedirectRoute from "./RedirectRoute";
+import PrivateRoute from "./PrivateRoute";
 import Page from "./Page";
 
-export { RedirectRoute, Page };
+export { RedirectRoute, PrivateRoute, Page };

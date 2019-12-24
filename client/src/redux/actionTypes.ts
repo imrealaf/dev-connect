@@ -22,3 +22,6 @@ export const LOGOUT = `${config.namespace}/LOGOUT`;
 // PROFILE
 export const GET_PROFILE = `${config.namespace}/GET_PROFILE`;
 export const PROFILE_ERROR = `${config.namespace}/PROFILE_ERROR`;
+export const CLEAR_PROFILE = `${config.namespace}/CLEAR_PROFILE`;
+export const CREATE_PROFILE_SUCCESS = `${config.namespace}/CREATE_PROFILE_SUCCESS`;
+export const CREATE_PROFILE_FAIL = `${config.namespace}/CREATE_PROFILE_FAIL`;

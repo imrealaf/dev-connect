@@ -26,15 +26,21 @@ export const profileError = (payload: any): AnyAction => {
   };
 };
 
+export const clearProfile = (): AnyAction => {
+  return {
+    type: types.CLEAR_PROFILE
+  };
+};
+
 export const doGetCurrentProfile = (): any => async (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
-  // Login success ..
+  // Success ..
   try {
     const response = await axios.get(routes.API_CURRENT_PROFILE);
     dispatch(getCurrentProfile(response.data));
 
-    // Login fail ..
+    // Fail ..
   } catch (error) {
     dispatch(
       profileError({
@@ -43,4 +49,17 @@ export const doGetCurrentProfile = (): any => async (
       })
     );
   }
+};
+
+export const createProfileSuccess = (payload: any): AnyAction => {
+  return {
+    type: types.CREATE_PROFILE_SUCCESS,
+    payload: payload
+  };
+};
+
+export const createProfileFail = (): AnyAction => {
+  return {
+    type: types.CREATE_PROFILE_FAIL
+  };
 };

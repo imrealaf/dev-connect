@@ -6,7 +6,8 @@
  */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 
 import data from "../data/landing";
 import * as routes from "../constants/routes";
@@ -17,7 +18,15 @@ import { Hero } from "../components/ui";
 
 import heroImage from "../assets/landing.jpg";
 
-const Landing: React.FC = () => {
+interface ILandingProps {
+  isAuthenticated: boolean;
+}
+
+const Landing: React.FC<ILandingProps> = ({ isAuthenticated }) => {
+  if (isAuthenticated) {
+    return <Redirect to={routes.DASHBOARD} />;
+  }
+
   /*
    *  Render
    */
@@ -54,4 +63,8 @@ const Landing: React.FC = () => {
   );
 };
 
-export default Landing;
+const mapStateToProps = (state: any) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Landing);

@@ -13,6 +13,7 @@ import * as routes from "../../constants/routes";
 import { AuthPayload, AuthUserPayload } from "../../types/Auth";
 import * as types from "../actionTypes";
 import * as auth from "../../utils/auth";
+import { clearProfile } from "./profile.actions";
 
 /*
     --------- CURRENT USER -----------
@@ -101,4 +102,5 @@ export const doLogout = (): any => async (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   dispatch(logout());
+  dispatch(clearProfile());
 };
